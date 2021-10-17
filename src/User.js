@@ -1,5 +1,5 @@
 class User {
-  constructor(data) {
+  constructor(data){ 
     this.id = data.id;
     this.name = data.name;
     this.address = data.address;
@@ -9,9 +9,9 @@ class User {
     this.friends = data.friends;
   }
   returnFirstName() {
-    return this.name;
+    return this.name.split(" ")[0];
   }
-  
+
 }
 
 
@@ -31,3 +31,5 @@ var user1 = {
 };
 var user2 = new User(user1)
 console.log(user2.returnFirstName())
+
+module.exports = User
