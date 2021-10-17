@@ -1,13 +1,12 @@
-const User = require(../src/data/User)
+const User = require("../src/User")
 
 class UserRepository {
   constructor(userData) {
-    userData.forEach((element) => {
+    this.users = userData.forEach((element) => {
       element = new User(element)        
     })
-
+    return this.users;
   }
-
 }
 
 export default UserRepository;
