@@ -9,9 +9,8 @@ class User {
     this.friends = data.friends;
   }
   returnFirstName() {
-    return this.name;
+    return this.name.split(" ")[0];
   }
-  
 }
 
 
@@ -30,4 +29,4 @@ var user1 = {
   ]
 };
 var user2 = new User(user1)
-console.log(user2.returnFirstName())
+console.log(user2.returnFirstName());
