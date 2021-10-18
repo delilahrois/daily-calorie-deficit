@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import UserRepository from '../src/UserRepository';
-const userData = require('../src/data/users')
+const userData = require('../src/data/users');
+import User from '/src/User';
 
 describe('User Repository', () => {
   let userRepo;
@@ -8,6 +9,7 @@ describe('User Repository', () => {
 
   beforeEach(() => {
     userRepo = new UserRepository(userData);
+    userRepo.createEachUser();
   });
 
   it('should be a function', function () {
@@ -18,8 +20,13 @@ describe('User Repository', () => {
     expect(userRepo).to.be.an.instanceOf(UserRepository);
   });
 
-  it('should ')
-
+  it('should accept a parameter', function() {
+    expect(userRepo.users).to.equal(userData);
+  });
+  
+  it('should create instances of User', function () {
+    expect(userRepo.createdUsers[0]).to.be.an.instanceOf(User);
+  });
 });
   
 
