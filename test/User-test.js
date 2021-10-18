@@ -23,11 +23,6 @@ describe('User', function() {
     expect(user1).to.be.an.instanceof(User)
   })
 
-  // it('should not be able to instantiate without an argument', function() {
-  //   user2 = new User()
-  //   expect(user2).to.equal('undefined')
-  // })
-
   it('should be able to return the first name only', function() {
     user1.returnFirstName()
     expect(user1.returnFirstName()).to.equal('Colgan')
