@@ -1,5 +1,6 @@
-const User = require("../src/User.js")
-const userData = require("/src/data/users.js")
+import User from '../src/User';
+
+// const userData = require("/src/data/users.js")
 
 class UserRepository {
   constructor(userData) {
@@ -31,4 +32,3 @@ class UserRepository {
 }
 
 export default UserRepository;
-

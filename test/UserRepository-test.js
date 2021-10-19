@@ -1,11 +1,9 @@
 import { expect } from 'chai';
 import UserRepository from '../src/UserRepository';
-const userData = require('../src/data/users');
 import User from '../src/User';
 
 describe('User Repository', () => {
   let userRepo;
-  let luisa;
   let users;
 
 
@@ -101,7 +99,7 @@ describe('User Repository', () => {
   it('should accept a parameter', function() {
     expect(userRepo.users).to.equal(users);
   });
-  
+
   it('should create instances of User', function () {
     expect(userRepo.createdUsers[0]).to.be.an.instanceOf(User);
   });
@@ -114,6 +112,3 @@ describe('User Repository', () => {
     expect(userRepo.calculateAverage()).to.equal(6400);
   });
 });
-  
-
-
