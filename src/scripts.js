@@ -14,8 +14,8 @@ import './css/styles.css';
 import './images/turing-logo.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
-console.log('Heeeey')
-// window.addEventListener('load', pageLoad)
+// console.log('Heeeey')
+window.addEventListener('load', pageLoad)
 
 // An example of how you tell webpack to use a JS file
 
@@ -23,6 +23,7 @@ const example = 'Hey'
 
 //Query Selectors
 const firstName = document.querySelector('#userName')
+// const infoCard = document.querySelector()
 
 
 //Event Listeners
@@ -43,3 +44,8 @@ function generateUsers() {
 function updateFirstName() {
   firstName.innerText = `Hello, ${userList.findUser(43)}`
 }
+
+// need to write a function that updates the user infoCard section with
+//relevant user info: Name, Email, strideLength, Daily Step Goal, and amount of friends?
+// make sure we have relevant query selectors for the user info card section
+// this function should run on page load, so it can be slapped into the pageLoad function

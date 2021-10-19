@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../src/css/styles.css">
+    <!-- <link rel="stylesheet" href="../src/css/styles.css"> -->
     <!-- meta name viewport?? -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
     <header class="header">
       <div class="header-container">
         <h1>Hello, User!</h1>
-        <img src="../src/images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+        <!-- <img src="../src/images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
       </div>
       <div class="header-message">
         <h2>Here's today at a glance.</h2> <!--add date here -->
@@ -32,7 +32,7 @@
         </div>
       </div>
       <button class="aside-btn" id="settingsBtn">Settings</button> <!-- settings or logout button -->
-    </aside> 
+    </aside>
     <div class="row1">
       <section class="main-widget" id="stepsWidget">
         <h2>Steps</h2>
@@ -79,16 +79,21 @@
   </div>
   <aside class="main-profile-bar"> <!-- this is our profile area -->
     <div>
-      <img> <!-- cute picture to represent a user -->
+      <img class="profile-photo" src="https://cdn.dribbble.com/users/1162077/screenshots/7201746/media/76dccfe4c4f94b1f88510357014e6b0e.png" alt ="Gym Pidgeon">
     </div>
+    <p id =''>
+      <!-- user name here -->
+    </p>
     <p>
-        <!-- user name here -->
-        <!-- daily step goal here -->
+      <!-- user email here -->
+    </p>
+    <p>
+      <!-- daily step goal here -->
     </p>
     <div>
         <!-- friends data? maybe show first 3 friends name and steps today -->
     </div>
-  </aside> 
+  </aside>
 </main>
     <script src="bundle.js"></script>
   </body>
