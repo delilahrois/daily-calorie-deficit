@@ -11,5 +11,6 @@ class User {
   returnFirstName() {
     return this.name.split(" ")[0];
   }
+}
 
-module.exports = User
+module.exports = User;
