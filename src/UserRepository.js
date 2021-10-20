@@ -29,6 +29,10 @@ class UserRepository {
     }, 0);
     return average / this.createdUsers.length;
   }
+
+  returnRandomUser() {
+    return Math.floor(Math.random() * this.createdUsers.length);
+  }
 }
 
 export default UserRepository;

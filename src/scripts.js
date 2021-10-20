@@ -6,7 +6,8 @@ import User from '../src/User';
 import fetchUsers from '../src/fetch';
 // console.log(fetchUsers.userData)
 
-let userList
+let userList;
+let currentUser;
 
 
 // An example of how you tell webpack to use a CSS file
@@ -38,7 +39,7 @@ const stepGoalComparisons = document.querySelector('#stepGoalComparisons')
 
 //functions
 
-function pageLoad(){
+function pageLoad() {
   generateUsers();
   updateFirstName();
   fillUserCard();
@@ -46,25 +47,29 @@ function pageLoad(){
 }
 
 function generateUsers() {
-  userList = new UserRepository(fetchUsers);
-  console.log('user list', userList)
+  userList = new UserRepository(fetchUsers.promiseResult);
+  console.log(userList)
   userList.createEachUser();
 }
 
 function updateFirstName() {
-  firstName.innerText = `Hello, ${userList.findUser(43).returnFirstName()}`
+  currentUser = userList.findUser(userList.returnRandomUser());
+  firstName.innerText = `Hello, ${currentUser.returnFirstName()}`
 }
 
 function fillUserCard() {
-  profileName.innerText = `${userList.createdUsers[42].name}`
-  emailAddress.innerText = `${userList.createdUsers[42].email}`
-  stepGoal.innerText = `Your daily step goal is ${userList.createdUsers[42].dailyStepGoal}`
-  friendsList.innerText = `${userList.createdUsers[42].friends}`
+  profileName.innerText = `${currentUser.name}`;
+  emailAddress.innerText = `${currentUser.email}`;
+  stepGoal.innerText = `Your daily step goal is 
+  ${currentUser.dailyStepGoal}`;
+  friendsList.innerText = `${currentUser.friends}`
 }
 
-function updateStepCard(){
-  stepGoalComparisons.innerText = `Your step goal is ${userList.createdUsers[42].dailyStepGoal} - compared to the average step goal of all users: ${userList.calculateAverage()}`
+function updateStepCard() {
+  stepGoalComparisons.innerText = `Your step goal is ${currentUser.dailyStepGoal}- compared to the average step goal of all users: 
+   ${userList.calculateAverage()}`;
 }
+
 
 // need to write a function that updates the user infoCard section with
 //relevant user info: Name, Email, strideLength, Daily Step Goal, and amount of friends?
