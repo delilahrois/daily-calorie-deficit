@@ -1,5 +1,6 @@
-const User = require("../src/User.js")
-const userData = require("/src/data/users.js")
+import User from '../src/User';
+
+// const userData = require("/src/data/users.js")
 
 class UserRepository {
   constructor(userData) {
@@ -18,6 +19,7 @@ class UserRepository {
     const result = this.createdUsers.find((user) => {
       return user.id === idNumber;
     });
+    console.log(result)
     return result;
   }
 
@@ -31,4 +33,3 @@ class UserRepository {
 }
 
 export default UserRepository;
-
