@@ -3,7 +3,8 @@
 import userData from './data/users';
 import UserRepository from './UserRepository';
 import User from '../src/User';
-console.log(userData)
+import fetchUsers from '../src/fetch';
+// console.log(fetchUsers.userData)
 
 let userList
 
@@ -45,7 +46,8 @@ function pageLoad(){
 }
 
 function generateUsers() {
-  userList = new UserRepository(userData);
+  userList = new UserRepository(fetchUsers);
+  console.log('user list', userList)
   userList.createEachUser();
 }
 
