@@ -6,7 +6,8 @@ import User from '../src/User';
 import fetchUsers from '../src/fetch';
 // console.log(fetchUsers.userData)
 
-let userList
+let userList;
+let currentUser;
 
 
 // An example of how you tell webpack to use a CSS file
@@ -16,8 +17,7 @@ import './css/styles.css';
 import './images/turing-logo.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
-// console.log('Heeeey')
-window.addEventListener('load', pageLoad)
+
 
 // An example of how you tell webpack to use a JS file
 
@@ -34,37 +34,49 @@ const stepGoalComparisons = document.querySelector('#stepGoalComparisons')
 
 
 //Event Listeners
-
+window.addEventListener('load', getFetch);
 
 //functions
 
-function pageLoad(){
-  generateUsers();
+
+function pageLoad(users){
+  generateUsers(users);
   updateFirstName();
   fillUserCard();
   updateStepCard();
 }
 
-function generateUsers() {
-  userList = new UserRepository(fetchUsers);
-  console.log('user list', userList)
+function getFetch() {
+  fetchUsers().then((users) => {
+    console.log('users', users)
+    pageLoad(users.userData)
+  })
+}
+
+function generateUsers(users) {
+  userList = new UserRepository(users);
   userList.createEachUser();
+  console.log('user list', userList)
 }
 
 function updateFirstName() {
-  firstName.innerText = `Hello, ${userList.findUser(43).returnFirstName()}`
+  currentUser = userList.findUser(userList.returnRandomUser());
+  firstName.innerText = `Hello, ${currentUser.returnFirstName()}`
 }
 
 function fillUserCard() {
-  profileName.innerText = `${userList.createdUsers[42].name}`
-  emailAddress.innerText = `${userList.createdUsers[42].email}`
-  stepGoal.innerText = `Your daily step goal is ${userList.createdUsers[42].dailyStepGoal}`
-  friendsList.innerText = `${userList.createdUsers[42].friends}`
+  profileName.innerText = `${currentUser.name}`;
+  emailAddress.innerText = `${currentUser.email}`;
+  stepGoal.innerText = `Your daily step goal is 
+  ${currentUser.dailyStepGoal}`;
+  friendsList.innerText = `${currentUser.friends}`
 }
 
-function updateStepCard(){
-  stepGoalComparisons.innerText = `Your step goal is ${userList.createdUsers[42].dailyStepGoal} - compared to the average step goal of all users: ${userList.calculateAverage()}`
+function updateStepCard() {
+  stepGoalComparisons.innerText = `Your step goal is ${currentUser.dailyStepGoal}- compared to the average step goal of all users: 
+   ${userList.calculateAverage()}`;
 }
+
 
 // need to write a function that updates the user infoCard section with
 //relevant user info: Name, Email, strideLength, Daily Step Goal, and amount of friends?
