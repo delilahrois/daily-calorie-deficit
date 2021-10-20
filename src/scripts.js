@@ -24,6 +24,11 @@ const example = 'Hey'
 
 //Query Selectors
 const firstName = document.querySelector('#userName')
+const profileName = document.querySelector('#profileName')
+const emailAddress = document.querySelector('#emailAddress')
+const stepGoal = document.querySelector('#stepGoal');
+const friendsList = document.querySelector('#friendsList')
+const stepGoalComparisons = document.querySelector('#stepGoalComparisons')
 // const infoCard = document.querySelector()
 
 
@@ -35,6 +40,8 @@ const firstName = document.querySelector('#userName')
 function pageLoad(){
   generateUsers();
   updateFirstName();
+  fillUserCard();
+  updateStepCard();
 }
 
 function generateUsers() {
@@ -44,6 +51,17 @@ function generateUsers() {
 
 function updateFirstName() {
   firstName.innerText = `Hello, ${userList.findUser(43).returnFirstName()}`
+}
+
+function fillUserCard() {
+  profileName.innerText = `${userList.createdUsers[42].name}`
+  emailAddress.innerText = `${userList.createdUsers[42].email}`
+  stepGoal.innerText = `Your daily step goal is ${userList.createdUsers[42].dailyStepGoal}`
+  friendsList.innerText = `${userList.createdUsers[42].friends}`
+}
+
+function updateStepCard(){
+  stepGoalComparisons.innerText = `Your step goal is ${userList.createdUsers[42].dailyStepGoal} - compared to the average step goal of all users: ${userList.calculateAverage()}`
 }
 
 // need to write a function that updates the user infoCard section with
