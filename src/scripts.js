@@ -17,8 +17,7 @@ import './css/styles.css';
 import './images/turing-logo.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
-// console.log('Heeeey')
-window.addEventListener('load', pageLoad)
+
 
 // An example of how you tell webpack to use a JS file
 
@@ -35,21 +34,29 @@ const stepGoalComparisons = document.querySelector('#stepGoalComparisons')
 
 
 //Event Listeners
-
+window.addEventListener('load', getFetch);
 
 //functions
 
-function pageLoad() {
-  generateUsers();
+
+function pageLoad(users){
+  generateUsers(users);
   updateFirstName();
   fillUserCard();
   updateStepCard();
 }
 
-function generateUsers() {
-  userList = new UserRepository(fetchUsers.promiseResult);
-  console.log(userList)
+function getFetch() {
+  fetchUsers().then((users) => {
+    console.log('users', users)
+    pageLoad(users.userData)
+  })
+}
+
+function generateUsers(users) {
+  userList = new UserRepository(users);
   userList.createEachUser();
+  console.log('user list', userList)
 }
 
 function updateFirstName() {
