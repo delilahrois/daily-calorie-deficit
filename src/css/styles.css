@@ -95,3 +95,10 @@ aside {
   width: 25%;
   max-width: 200px;
 }
+
+.profile-photo {
+  margin: 40px;
+  height: 200px;
+   width: 200px;
+   clip-path: circle();
+}
