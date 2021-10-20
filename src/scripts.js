@@ -3,8 +3,9 @@
 import userData from './data/users';
 import UserRepository from './UserRepository';
 import User from '../src/User';
+console.log(userData)
 
-
+let userList
 
 
 // An example of how you tell webpack to use a CSS file
@@ -37,12 +38,12 @@ function pageLoad(){
 }
 
 function generateUsers() {
-  let userList = new UserRepository(userData);
+  userList = new UserRepository(userData);
   userList.createEachUser();
 }
 
 function updateFirstName() {
-  firstName.innerText = `Hello, ${userList.findUser(43)}`
+  firstName.innerText = `Hello, ${userList.findUser(43).returnFirstName()}`
 }
 
 // need to write a function that updates the user infoCard section with

@@ -19,6 +19,7 @@ class UserRepository {
     const result = this.createdUsers.find((user) => {
       return user.id === idNumber;
     });
+    console.log(result)
     return result;
   }
 
