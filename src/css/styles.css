@@ -85,7 +85,7 @@ aside {
   margin-top: 50px;
   padding: 20px;
   background-color: #dce1de;
-  opacity: 80%;
+  opacity: 100%;
 }
 
 /* profile aside  */
@@ -100,5 +100,20 @@ aside {
   margin: 40px;
   height: 200px;
    width: 200px;
-   clip-path: circle();
+   clip-path: circle();  
+}
+
+.sleep-photo {
+  height: 100px;
+  width: 100px;
+  margin: 0;
+}
+
+#sleepWidget {
+background-image: url(https://media.istockphoto.com/vectors/night-pattern-with-clouds-moons-and-stars-vector-background-wallpaper-vector-id996616508?k=20&m=996616508&s=612x612&w=0&h=wUoNVN0JxrmK4F_s1uszzLM7NvNZ3cWF4hFyB7xW5aM=);
+}
+
+#waterWidget {
+  background-size: contain;
+  background-image: url(https://previews.123rf.com/images/yuliarudenko/yuliarudenko1904/yuliarudenko190400078/123427508-rain-seamless-vector-pattern-falling-cute-water-drops-shades-of-blue-rainy-background-kawaii-style.jpg);
 }
