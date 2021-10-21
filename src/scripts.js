@@ -39,16 +39,19 @@ function pageLoad(users){
 
 function getFetch() {
   fetchUsers().then((users) => {
-    console.log('users', users)
     pageLoad(users.userData)
   })
+}
+
+function getAverageSleep() {
+  
+}
 }
 
 
 function generateUsers(users) {
   userList = new UserRepository(users);
   userList.createEachUser();
-  console.log('user list', userList)
 }
 
 function updateFirstName() {

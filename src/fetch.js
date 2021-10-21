@@ -6,6 +6,7 @@ const fetchUsers = () => {
 const fetchHydration = () => {
   return fetch('https://pacific-badlands-43237.herokuapp.com/api/v1/hydration')
     .then(response => response.json())
+    .then(data => console.log(data))
 }
 
 const fetchSleep = () => {
@@ -13,10 +14,4 @@ const fetchSleep = () => {
     .then(response => response.json())
 }
 
-const fetchActivityData = () => {
-  return fetch('https://pacific-badlands-43237.herokuapp.com/api/v1/activity')
-    .then(response => response.json())
-}
-
-
-export default fetchUsers, fetchHydration, fetchSleep, fetchActivityData;
+module.exports = fetchUsers, fetchHydration, fetchSleep;
