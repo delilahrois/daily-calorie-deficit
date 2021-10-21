@@ -1,6 +1,5 @@
 import User from '../src/User';
 
-// const userData = require("/src/data/users.js")
 
 class UserRepository {
   constructor(userData) {
