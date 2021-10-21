@@ -40,19 +40,20 @@
           <img> <!-- icon to keep track of steps. pie chart or circle that fills up? -->
         </div>
         <p id="stepGoalComparisons">
-          <!-- this is where we will insert user data about steps and step goals-->
-          <!-- compare user data to the average user's steps / step goals -->
+          You took 2 steps!
+          Your daily goal is 3 steps.
         </p>
       </section>
       <section class="main-widget" id="waterWidget">
         <h2>Hydration</h2>
-        <div>
-          <img> <!-- icon to keep track of hydration. water icon that fills up? -->
-        </div>
         <p class="hydration-message">
           Today you have consumed 7000oz of water!
           5/30 - 20oz, 6/1 - 20oz, 6/2 - 21oz, 6/3 - 7oz, 6/4 - 18oz, 6-5 - 12oz, 6-6 - 5oz
         </p>
+        <label for="hydration-date">Hydration Date:</label>
+        <input type="date" id="hydration-input" name="hydration-day"
+               value="2020-01-22" 
+               min="2019-06-15" max="2020-01-22">
       </section>
     </div>
     <div class="row2">
@@ -62,6 +63,9 @@
         Last night you slept 6.5 hours and your sleep quality was 6/10.
         All time average = 7 hours, 4 quality
       </p>
+      <input type="date" id="sleep-input" name="sleep-day"
+      value="2020-01-22" 
+      min="2019-06-15" max="2020-01-22">
     </section>
     <section class="main-widget" id="stairsWidget">
       <h2>Stairs</h2>
