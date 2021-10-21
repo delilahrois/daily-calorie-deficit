@@ -19,4 +19,4 @@ const fetchActivityData = () => {
 }
 
 
-export default fetchUsers, fetchHydration, fetchSleep, fetchActivityData;
+module.exports = fetchUsers, fetchHydration, fetchSleep, fetchActivityData;
