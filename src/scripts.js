@@ -1,27 +1,19 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
+// Imports
 import userData from './data/users';
 import UserRepository from './UserRepository';
 import User from '../src/User';
 import fetchUsers from '../src/fetch';
-// console.log(fetchUsers.userData)
+import fetchHydration from '../src/fetch';
+import fetchSleep from '../src/fetch';
+import fetchActivityData from '../src/fetch';
 
+import './css/styles.css';
+import './images/turing-logo.png'
+
+// Global Variables
 let userList;
 let currentUser;
 
-
-// An example of how you tell webpack to use a CSS file
-import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-
-console.log('This is the JavaScript entry file - your code begins here.');
-
-
-// An example of how you tell webpack to use a JS file
-
-const example = 'Hey'
 
 //Query Selectors
 const firstName = document.querySelector('#userName')
@@ -33,11 +25,10 @@ const stepGoalComparisons = document.querySelector('#stepGoalComparisons')
 // const infoCard = document.querySelector()
 
 
-//Event Listeners
+// Event Listeners
 window.addEventListener('load', getFetch);
 
-//functions
-
+// Functions
 
 function pageLoad(users){
   generateUsers(users);
@@ -52,6 +43,7 @@ function getFetch() {
     pageLoad(users.userData)
   })
 }
+
 
 function generateUsers(users) {
   userList = new UserRepository(users);
@@ -73,12 +65,12 @@ function fillUserCard() {
 }
 
 function updateStepCard() {
-  stepGoalComparisons.innerText = `Your step goal is ${currentUser.dailyStepGoal}- compared to the average step goal of all users: 
+  stepGoalComparisons.innerText = `Your step goal is 
+  ${currentUser.dailyStepGoal}- compared to the average step goal of all users: 
    ${userList.calculateAverage()}`;
 }
 
+//creating a new class with its own methods to calculate avg fl oz 
+// consumed per day, all time, by specific day or per week.
 
-// need to write a function that updates the user infoCard section with
-//relevant user info: Name, Email, strideLength, Daily Step Goal, and amount of friends?
-// make sure we have relevant query selectors for the user info card section
-// this function should run on page load, so it can be slapped into the pageLoad function
+
