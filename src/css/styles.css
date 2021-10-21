@@ -8,7 +8,7 @@ body, html {
   border: 0px;
   margin: 0 px;
   font-family: 'Montserrat', sans-serif, bold;
-  color: #1f2421;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
 }
@@ -103,17 +103,22 @@ aside {
    clip-path: circle();  
 }
 
-.sleep-photo {
-  height: 100px;
-  width: 100px;
-  margin: 0;
-}
-
 #sleepWidget {
-background-image: url(https://media.istockphoto.com/vectors/night-pattern-with-clouds-moons-and-stars-vector-background-wallpaper-vector-id996616508?k=20&m=996616508&s=612x612&w=0&h=wUoNVN0JxrmK4F_s1uszzLM7NvNZ3cWF4hFyB7xW5aM=);
+  background-size:cover;
+  background-image: url(https://cache.desktopnexus.com/thumbseg/1538/1538054-bigthumbnail.jpg);
 }
 
 #waterWidget {
   background-size: contain;
-  background-image: url(https://previews.123rf.com/images/yuliarudenko/yuliarudenko1904/yuliarudenko190400078/123427508-rain-seamless-vector-pattern-falling-cute-water-drops-shades-of-blue-rainy-background-kawaii-style.jpg);
+  background-image: url(https://vsthemes.org/uploads/posts/2021-07/1626002744_skrinshot-11-07-2021-16_24_24.png);
+}
+
+#stepsWidget {
+  background-size: cover;
+  background-image: url(https://1.bp.blogspot.com/-xxPNhLnqRw4/UsZ5378PrgI/AAAAAAAACRE/DmjUGk1p8Lk/s1600/Outdoor+Anime+Landscape+[Scenery+-+Background]+101.png);
+}
+
+#stairsWidget {
+  background-size: cover;
+  background-image: url(https://www.wallpaperup.com/uploads/wallpapers/2017/05/23/1090456/9e31c9f73f7d83882f65b0ab9f433d54-700.jpg);
 }
