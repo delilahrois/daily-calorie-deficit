@@ -14,4 +14,10 @@ const fetchSleep = () => {
     .then(response => response.json())
 }
 
-module.exports = fetchUsers, fetchHydration, fetchSleep;
+const fetchActivityData = () => {
+  return fetch('https://pacific-badlands-43237.herokuapp.com/api/v1/activity')
+    .then(response => response.json())
+}
+
+module.exports = fetchUsers, fetchHydration, fetchSleep, fetchActivityData;
+

@@ -1,6 +1,7 @@
 // Imports
 import userData from './data/users';
 import UserRepository from './UserRepository';
+import HydroRepository from './HydroRepository';
 import User from '../src/User';
 import fetchUsers from '../src/fetch';
 import fetchHydration from '../src/fetch';
@@ -62,18 +63,16 @@ function updateFirstName() {
 function fillUserCard() {
   profileName.innerText = `${currentUser.name}`;
   emailAddress.innerText = `${currentUser.email}`;
-  stepGoal.innerText = `Your daily step goal is 
+  stepGoal.innerText = `Your daily step goal is
   ${currentUser.dailyStepGoal}`;
   friendsList.innerText = `${currentUser.friends}`
 }
 
 function updateStepCard() {
-  stepGoalComparisons.innerText = `Your step goal is 
-  ${currentUser.dailyStepGoal}- compared to the average step goal of all users: 
+  stepGoalComparisons.innerText = `Your step goal is
+  ${currentUser.dailyStepGoal}- compared to the average step goal of all users:
    ${userList.calculateAverage()}`;
 }
 
-//creating a new class with its own methods to calculate avg fl oz 
+//creating a new class with its own methods to calculate avg fl oz
 // consumed per day, all time, by specific day or per week.
-
-
