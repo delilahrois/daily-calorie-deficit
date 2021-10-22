@@ -17,7 +17,7 @@
         <!-- <img src="../src/images/turing-logo.png" alt="turing logo" height="100px" width="100px"> -->
       </div>
       <div class="header-message">
-        <h2>Here's today at a glance.</h2> <!--add date here -->
+        <h2>Here's today 2006/06/06 at a glance.</h2> <!--add date here -->
       </div>
     </header>
   <main>
@@ -40,31 +40,32 @@
           <img> <!-- icon to keep track of steps. pie chart or circle that fills up? -->
         </div>
         <p id="stepGoalComparisons">
-          <!-- this is where we will insert user data about steps and step goals-->
-          <!-- compare user data to the average user's steps / step goals -->
+          You took 2 steps!
+          Your daily goal is 3 steps.
         </p>
       </section>
       <section class="main-widget" id="waterWidget">
         <h2>Hydration</h2>
-        <div>
-          <img> <!-- icon to keep track of hydration. water icon that fills up? -->
-        </div>
-        <p>
-          <!-- this is where we will insert user data about today's hydration-->
-          <!-- view a small image about this week's info -->
+        <p class="hydration-message">
+          Today you have consumed 7000oz of water!
+          5/30 - 20oz, 6/1 - 20oz, 6/2 - 21oz, 6/3 - 7oz, 6/4 - 18oz, 6-5 - 12oz, 6-6 - 5oz
         </p>
+        <label for="hydration-date">Hydration Date:</label>
+        <input type="date" id="hydration-input" name="hydration-day"
+               value="2020-01-22" 
+               min="2019-06-15" max="2020-01-22">
       </section>
     </div>
     <div class="row2">
     <section class="main-widget" id="sleepWidget">
       <h2>Sleep</h2>
-      <div>
-        <img> <!-- icon to keep track of sleep. moon icon or something? -->
-      </div>
-      <p>
-        <!-- this is where we will insert user data about sleep hours + quality from last night -->
-        <!-- show all time average hours + quality -->
+      <p class="sleep-message">
+        Last night you slept 6.5 hours and your sleep quality was 6/10.
+        All time average = 7 hours, 4 quality
       </p>
+      <input type="date" id="sleep-input" name="sleep-day"
+      value="2020-01-22" 
+      min="2019-06-15" max="2020-01-22">
     </section>
     <section class="main-widget" id="stairsWidget">
       <h2>Stairs</h2>
@@ -79,7 +80,7 @@
   </div>
   <aside class="main-profile-bar"> <!-- this is our profile area -->
     <div>
-      <img class="profile-photo" src="https://cdn.dribbble.com/users/1162077/screenshots/7201746/media/76dccfe4c4f94b1f88510357014e6b0e.png" alt ="Gym Pidgeon">
+      <img class="profile-photo" src="https://thumbs.dreamstime.com/b/default-placeholder-fitness-trainer-t-shirt-half-length-portrait-photo-avatar-gray-color-default-placeholder-fitness-trainer-119457652.jpg" alt ="Gym Pidgeon">
     </div>
     <p id ='profileName'>
       profileName

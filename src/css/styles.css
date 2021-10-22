@@ -8,7 +8,7 @@ body, html {
   border: 0px;
   margin: 0 px;
   font-family: 'Montserrat', sans-serif, bold;
-  color: #1f2421;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
 }
@@ -24,26 +24,26 @@ body, html {
 }
 
 main {
-  border: 2px solid red;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 75%;
+  background-color: #DCE1DE;
 }
 
 aside {
-  border: 2px solid orange;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  background-color: #216869;
 }
 
 /* nav bar  */
 
 .main-nav-bar {
-  width: 50px;
+  width: 8%;
   margin-left: 10px;
 }
 
@@ -52,24 +52,23 @@ aside {
 .header {
   display: flex;
   flex-direction: column;
-  border: 2px solid blue;
   width: 100%;
   height: 25%;
   font-weight: bolder;
+  background-color: #49A078;
 }
 
 .header-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 2px solid yellow;
   font-size: larger;
   margin: 10px 30px;
 }
 
 .header-message {
-  border: 2px solid purple;
   margin-left: 10%;
+  
 }
 
 .header-logo {
@@ -85,7 +84,7 @@ aside {
   margin-top: 50px;
   padding: 20px;
   background-color: #dce1de;
-  opacity: 80%;
+  opacity: 100%;
 }
 
 /* profile aside  */
@@ -100,5 +99,39 @@ aside {
   margin: 40px;
   height: 200px;
    width: 200px;
-   clip-path: circle();
+   clip-path: circle();  
+}
+
+#sleepWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(https://cache.desktopnexus.com/thumbseg/1538/1538054-bigthumbnail.jpg);
+  background-size:cover;
+}
+
+#waterWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(https://vsthemes.org/uploads/posts/2021-07/1626002744_skrinshot-11-07-2021-16_24_24.png);
+  background-size: contain;
+}
+
+
+#stepsWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(https://1.bp.blogspot.com/-xxPNhLnqRw4/UsZ5378PrgI/AAAAAAAACRE/DmjUGk1p8Lk/s1600/Outdoor+Anime+Landscape+[Scenery+-+Background]+101.png);
+  background-size: cover;
+}
+
+#stairsWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(https://www.wallpaperup.com/uploads/wallpapers/2017/05/23/1090456/9e31c9f73f7d83882f65b0ab9f433d54-700.jpg);
+  background-size: cover;
+}
+
+div > p {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  background-attachment: fixed;
+
+  filter: blur(12px);
 }
