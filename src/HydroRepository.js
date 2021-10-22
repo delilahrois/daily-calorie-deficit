@@ -18,6 +18,17 @@ class HydroRepository {
     return userWaterData.numOunces
   }
 
+  returnUserWaterPerWeek(id, dateStart, dateEnd) {
+    let userWaterData = this.hydroData.filter((data) => {
+      return data.userID === id
+    }).filter((data) => {
+      return data.date >= dateStart && data.date <= dateEnd
+    }).map((data) => {
+      return data.numOunces
+    })
+    return userWaterData
+  }
+
 
 }
 
