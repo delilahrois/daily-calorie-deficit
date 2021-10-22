@@ -205,7 +205,7 @@ describe('HydroRepository', function() {
   })
 
   it('should be able to return the amount of water consumed each day over the course of a week', function() {
-    expect(hydro.returnUserWaterPerWeek(2, "2019/06/15", "2019/06/21")).to.equal([75, 91, 96, 70, 76, 71, 27])
+    expect(hydro.returnUserWaterPerWeek(2, "2019/06/15", "2019/06/21")).to.deep.equal([75, 91, 96, 70, 76, 71, 27])
 
   })
 })
