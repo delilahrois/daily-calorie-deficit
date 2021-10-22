@@ -24,20 +24,15 @@ const profileName = document.querySelector('#profileName');
 const emailAddress = document.querySelector('#emailAddress');
 const stepGoal = document.querySelector('#stepGoal');
 const friendsList = document.querySelector('#friendsList');
-const stepGoalComparisons = document.querySelector('#stepGoalComparisons');
-// const infoCard = document.querySelector()
+const stepGoalComparisons = document.querySelector('#stepGoalMessage');
+const hydrationMessage = document.querySelector('#hydrationMessage');
+const sleepMessage = document.querySelector('#sleepMessage');
+const stairsMessage = document.querySelector('#stairsMessage');
 
-
-// Event Listeners
-// window.addEventListener('load', pageLoad);
 
 // Functions
 
 const pageLoad = () => {
-  getFetch();
-}
-
-const getFetch = () => {
   fetchUsers().then((users) => {
     generateUsers(users.userData);
     generateUserInfo();
@@ -65,16 +60,16 @@ const generateHydro = (data) => {
   hydroRepo = new HydroRepository(data);
 }
 
-function generateSleepyTime(data) {
+const generateSleepyTime = (data) => {
   sleepRepo = new SleepRepository(data);
 }
 
-function updateFirstName() {
+const updateFirstName = () => {
   currentUser = userList.findUser(userList.returnRandomUser());
   firstName.innerText = `Hello, ${currentUser.returnFirstName()}`;
 }
 
-function fillUserCard() {
+const fillUserCard = () => {
   profileName.innerText = `${currentUser.name}`;
   emailAddress.innerText = `${currentUser.email}`;
   stepGoal.innerText = `Your daily step goal is
@@ -82,10 +77,23 @@ function fillUserCard() {
   friendsList.innerText = `${currentUser.friends}`
 }
 
-function updateStepCard() {
+const updateStepCard = () => {
   stepGoalComparisons.innerText = `Your step goal is
   ${currentUser.dailyStepGoal}- compared to the average step goal of all users:
    ${userList.calculateAverage()}`;
 }
 
+const updateHydroCard = () => {
+
+}
+
+const updateSleepCard = () => {
+
+}
+
+const updateStairsCard = () => {
+
+}
+
+// Event Listeners
 window.addEventListener('load', pageLoad);
