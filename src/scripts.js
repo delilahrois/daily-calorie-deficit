@@ -16,6 +16,7 @@ let userList;
 let currentUser;
 let hydroRepo;
 let sleepRepo;
+const today = '2020/01/22';
 
 
 //Query Selectors
@@ -33,13 +34,35 @@ const stairsMessage = document.querySelector('#stairsMessage');
 // Functions
 
 const pageLoad = () => {
+  userFetch();
+  hydroFetch(); 
+  sleepFetch();
+  generateUserInfo();
+}
+
+
+const userFetch = () => {
   fetchUsers().then((users) => {
     generateUsers(users.userData);
-    generateUserInfo();
   })
+  // fetchHydration().then((data) => {
+  //   generateHydro(data);
+  //   console.log(hydroRepo)
+  // })
+  // fetchSleep().then((data) => {
+  //   generateSleepyTime(data.sleepData);
+  //   generateUserInfo();
+  // })
+}
+
+const hydroFetch = () => {
   fetchHydration().then((data) => {
-    generateHydro(data.hydrationData);
+    generateHydro(data);
+    console.log(hydroRepo)
   })
+}
+
+const sleepFetch = () => {
   fetchSleep().then((data) => {
     generateSleepyTime(data.sleepData);
   })
@@ -54,6 +77,7 @@ const generateUserInfo = () => {
   updateFirstName();
   fillUserCard();
   updateStepCard();
+  updateHydroCard();
 }
 
 const generateHydro = (data) => {
@@ -84,15 +108,16 @@ const updateStepCard = () => {
 }
 
 const updateHydroCard = () => {
-
+  hydrationMessage.innerText = `Today you drank ${hydroRepo.
+    returnUserWaterPerDay(currentUser.id, today)} ounces of water.`;
 }
 
 const updateSleepCard = () => {
-
+  sleepMessage.innerText = ``;
 }
 
 const updateStairsCard = () => {
-
+  stairsMessage.innerText = ``;
 }
 
 // Event Listeners
