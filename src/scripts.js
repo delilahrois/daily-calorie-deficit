@@ -29,20 +29,18 @@ const stepGoalComparisons = document.querySelector('#stepGoalComparisons');
 
 
 // Event Listeners
-window.addEventListener('load', pageLoad);
+// window.addEventListener('load', pageLoad);
 
 // Functions
 
-function pageLoad() {
+const pageLoad = () => {
   getFetch();
-  updateFirstName();
-  fillUserCard();
-  updateStepCard();
 }
 
-function getFetch() {
+const getFetch = () => {
   fetchUsers().then((users) => {
     generateUsers(users.userData);
+    generateUserInfo();
   })
   fetchHydration().then((data) => {
     generateHydro(data.hydrationData);
@@ -52,12 +50,18 @@ function getFetch() {
   })
 }
 
-function generateUsers(users) {
+const generateUsers = (users) => {
   userList = new UserRepository(users);
   userList.createEachUser();
 }
 
-function generateHydro(data) {
+const generateUserInfo = () => {
+  updateFirstName();
+  fillUserCard();
+  updateStepCard();
+}
+
+const generateHydro = (data) => {
   hydroRepo = new HydroRepository(data);
 }
 
@@ -67,7 +71,7 @@ function generateSleepyTime(data) {
 
 function updateFirstName() {
   currentUser = userList.findUser(userList.returnRandomUser());
-  firstName.innerText = `Hello, ${currentUser.returnFirstName()}`
+  firstName.innerText = `Hello, ${currentUser.returnFirstName()}`;
 }
 
 function fillUserCard() {
@@ -83,3 +87,5 @@ function updateStepCard() {
   ${currentUser.dailyStepGoal}- compared to the average step goal of all users:
    ${userList.calculateAverage()}`;
 }
+
+window.addEventListener('load', pageLoad);
