@@ -1,5 +1,4 @@
 // Imports
-import userData from './data/users';
 import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
@@ -15,6 +14,8 @@ import './images/turing-logo.png';
 // Global Variables
 let userList;
 let currentUser;
+let hydroRepo;
+let sleepRepo;
 
 
 //Query Selectors
@@ -28,12 +29,12 @@ const stepGoalComparisons = document.querySelector('#stepGoalComparisons');
 
 
 // Event Listeners
-window.addEventListener('load', getFetch);
+window.addEventListener('load', pageLoad);
 
 // Functions
 
-function pageLoad(users) {
-  generateUsers(users);
+function pageLoad() {
+  getFetch();
   updateFirstName();
   fillUserCard();
   updateStepCard();
@@ -41,13 +42,27 @@ function pageLoad(users) {
 
 function getFetch() {
   fetchUsers().then((users) => {
-    pageLoad(users.userData)
+    generateUsers(users.userData);
+  })
+  fetchHydration().then((data) => {
+    generateHydro(data.hydrationData);
+  })
+  fetchSleep().then((data) => {
+    generateSleepyTime(data.sleepData);
   })
 }
 
 function generateUsers(users) {
   userList = new UserRepository(users);
   userList.createEachUser();
+}
+
+function generateHydro(data) {
+  hydroRepo = new HydroRepository(data);
+}
+
+function generateSleepyTime(data) {
+  sleepRepo = new SleepRepository(data);
 }
 
 function updateFirstName() {
