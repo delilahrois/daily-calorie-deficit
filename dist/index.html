@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> <!-- insert font for page here -->
     <title>Activity Tracker</title>
-    <link rel="shortcut icon" type="svg" href="" alt="logo"><!-- insert PNG icon here -->
+    <!-- <link rel="shortcut icon" type="svg" href="" alt="logo">insert PNG icon here -->
   </head>
   <body>
     <header class="header">
@@ -39,14 +39,14 @@
         <div>
           <img> <!-- icon to keep track of steps. pie chart or circle that fills up? -->
         </div>
-        <p id="stepGoalComparisons">
+        <p  class="step-goal-message" id="stepGoalMessage">
           You took 2 steps!
           Your daily goal is 3 steps.
         </p>
       </section>
       <section class="main-widget" id="waterWidget">
         <h2>Hydration</h2>
-        <p class="hydration-message">
+        <p class="hydration-message" id="hydrationMessage">
           Today you have consumed 7000oz of water!
           5/30 - 20oz, 6/1 - 20oz, 6/2 - 21oz, 6/3 - 7oz, 6/4 - 18oz, 6-5 - 12oz, 6-6 - 5oz
         </p>
@@ -59,7 +59,7 @@
     <div class="row2">
     <section class="main-widget" id="sleepWidget">
       <h2>Sleep</h2>
-      <p class="sleep-message">
+      <p class="sleep-message" id="sleepMessage">
         Last night you slept 6.5 hours and your sleep quality was 6/10.
         All time average = 7 hours, 4 quality
       </p>
@@ -72,7 +72,7 @@
       <div>
         <img> <!-- icon to keep track of flights climbed. stairs image? -->
       </div>
-      <p>
+      <p class="stairs-message" id="stairsMessage">
         <!-- this is where we will insert user data about flights climbed-->
         <!-- compare user data to the average user? (optional) -->
       </p>
