@@ -1,3 +1,6 @@
+var dayjs = require('dayjs')
+dayjs().format()
+
 class HydroRepository {
   constructor(data) {
     this.hydroData = data
@@ -29,7 +32,19 @@ class HydroRepository {
     return userWaterData
   }
 
-
+  returnUserWaterThisWeek(id, dateEnd) {
+    let weekPrior = dayjs(dateEnd).subtract(7, "days");
+    let dateStart = weekPrior.format('YYYY-MM-DD');
+    let userWaterData = this.hydroData.filter((data) => {
+      return data.userID === id
+    }).filter((data) => {
+      return data.date >= dateStart && data.date <= dateEnd;
+    }).map((data) => {
+      return data.numOunces
+    })
+    console.log(userWaterData)
+    return userWaterData
+  }
 }
 
 
