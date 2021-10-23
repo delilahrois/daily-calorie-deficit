@@ -35,16 +35,14 @@ class HydroRepository {
   returnUserWaterThisWeek(id, dateEnd) {
     let weekPrior = dayjs(dateEnd).subtract(1, "week");
     let dateStart = weekPrior.format('YYYY/MM/DD');
-    console.log('date Start', dateStart)
-    console.log('date end', dateEnd)
     let userWaterData = this.hydroData.filter((data) => {
       return data.userID === id
     }).filter((data) => {
       return data.date >= dateStart
     }).map((data) => {
-      return data.numOunces
+      return {date: data.date, ounces: data.numOunces}
     })
-    // console.log(userWaterData)
+    console.log(userWaterData)
     return userWaterData
   }
 }

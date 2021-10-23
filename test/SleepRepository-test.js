@@ -262,4 +262,18 @@ describe('SleepRepository', () => {
   it('should return the total average sleep quality of all users', () => {
     expect(sleepRepo.totalAvgSleepQual()).to.equal(3.1257142857142868)
   })
+
+  it('should return hours slept every day for the last week', () => {
+    // console.log(sleepRepo.returnUserSleepThisWeek(1, '2019/06/21'))
+    expect(sleepRepo.returnUserSleepThisWeek(1, '2019/06/21')).to.deep.equal([
+  { date: '2019/06/15', sleeps: 6.1, quality: 2.2 },
+  { date: '2019/06/16', sleeps: 4.1, quality: 3.8 },
+  { date: '2019/06/17', sleeps: 8, quality: 2.6 },
+  { date: '2019/06/18', sleeps: 10.4, quality: 3.1 },
+  { date: '2019/06/19', sleeps: 10.7, quality: 1.2 },
+  { date: '2019/06/20', sleeps: 9.3, quality: 1.2 },
+  { date: '2019/06/21', sleeps: 7.8, quality: 4.2 }
+])
+  })
+
 })
