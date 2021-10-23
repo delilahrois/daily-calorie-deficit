@@ -17,7 +17,7 @@ class SleepRepository {
         return acc += sleep.hoursSlept;
       }
     }, 0) / totalSleep.length;
-    return result;
+    return Math.round(100*result)/100;
   }
 
   returnByDate(id, date, property) {
