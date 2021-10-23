@@ -14,7 +14,7 @@ class HydroRepository {
 
   returnUserWaterPerDay(id, date) {
     let userWaterData = this.hydroData.find((data) =>
-      data.userID === id && data.date === date)
+      data.userID === id && data.date === date);
     return userWaterData.numOunces
   }
 
