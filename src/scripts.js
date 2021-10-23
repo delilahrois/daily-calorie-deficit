@@ -28,6 +28,9 @@ const stepGoalComparisons = document.querySelector('#stepGoalMessage');
 const hydrationMessage = document.querySelector('#hydrationMessage');
 const sleepMessage = document.querySelector('#sleepMessage');
 const stairsMessage = document.querySelector('#stairsMessage');
+const dayBtn = document.querySelector('#dayBtn')
+const weekBtn = document.querySelector('#weekBtn')
+const allTimeBtn = document.querySelector('#allTimeBtn')
 
 // Functions
 
@@ -120,11 +123,33 @@ const updateSleepCard = () => {
     returnByDate(currentUser.id, today, 'sleepQuality')}`;
 }
 
+const updateHydroCardWeek = () => {
+  let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today)
+  hydrationMessage.innerText = `Over the last week, you drank ${result} ounces`
+  // console.log(hydroRepo.returnUserWaterThisWeek(currentUser.id, today))
+}
+
+const updateDomDay = () => {
+
+}
+
+// const updateDomWeek = () => {
+//  hydroRepo.returnUserWaterThisWeek(currentUser.id, today)
+// }
+
+const updateDomAllTime = () => {
+
+}
+
 // const updateStairsCard = () => {
 //   // stairsMessage.innerText = `You've climbed ${} flights of stairs today.`;
 // }
 
 // Event Listeners
 window.addEventListener('load', pageLoad);
+weekBtn.addEventListener('click', updateHydroCardWeek)
+dayBtn.addEventListener('click', testFunction)
 
-// console.log(updateHydroCard())
+function testFunction() {
+  console.log('hey!')
+}
