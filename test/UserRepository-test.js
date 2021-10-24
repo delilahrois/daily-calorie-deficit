@@ -8,9 +8,7 @@ describe('User Repository', () => {
 
 
   beforeEach(() => {
-    // userRepo = new UserRepository(users);
-    // userRepo.createEachUser();
-    // userRepo.findUser(1);
+    
     users = [
       {
         "id": 1,
@@ -83,32 +81,34 @@ describe('User Repository', () => {
         ]
       },
     ];
+
     userRepo = new UserRepository(users);
     userRepo.createEachUser();
     userRepo.findUser(1);
+
   });
 
-  it('should be a function', function () {
+  it('should be a function', () => {
     expect(UserRepository).to.be.a('function');
   });
 
-  it('should instantiate a new user repository', function () {
+  it('should instantiate a new user repository', () => {
     expect(userRepo).to.be.an.instanceOf(UserRepository);
   });
 
-  it('should accept a parameter', function() {
+  it('should accept a parameter', () => {
     expect(userRepo.users).to.equal(users);
   });
 
-  it('should create instances of User', function () {
+  it('should create instances of User', () => {
     expect(userRepo.createdUsers[0]).to.be.an.instanceOf(User);
   });
 
-  it('should return User data based on the user ID', function() {
+  it('should return User data based on the user ID', () => {
     expect(userRepo.findUser(1)).to.deep.equal(userRepo.createdUsers[0]);
   });
 
-  it('should be able to calculate average step goal of all users', function() {
+  it('should be able to calculate average step goal of all users', () => {
     expect(userRepo.calculateAverage()).to.equal(6400);
   });
 });

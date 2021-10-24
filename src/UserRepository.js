@@ -11,13 +11,13 @@ class UserRepository {
     this.users.forEach((user) => {
       let uniqueUser = new User(user);
       this.createdUsers.push(uniqueUser);
-    });
+    })
   }
 
   findUser(idNumber) {
     const result = this.createdUsers.find((user) => {
       return user.id === idNumber;
-    });
+    })
     return result;
   }
 
@@ -25,7 +25,7 @@ class UserRepository {
     let average = this.createdUsers.reduce((acc, elem) => {
       let sum = acc + elem.dailyStepGoal;
       return sum;
-    }, 0);
+    }, 0)
     return average / this.createdUsers.length;
   }
 

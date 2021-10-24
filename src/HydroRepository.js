@@ -1,9 +1,9 @@
-var dayjs = require('dayjs')
-dayjs().format()
+var dayjs = require('dayjs');
+dayjs().format();
 
 class HydroRepository {
   constructor(data) {
-    this.hydroData = data
+    this.hydroData = data;
   }
   returnUserAvgPerDay(id) {
     let userWaterData = this.hydroData.filter((data) => {
@@ -11,39 +11,38 @@ class HydroRepository {
     })
     let result = userWaterData.reduce((acc, item) => {
       return acc += item.numOunces;
-    }, 0) / userWaterData.length
-    return Math.round(100*result)/100
+    }, 0) / userWaterData.length;
+    return Math.round(100 * result) / 100;
   }
 
   returnUserWaterPerDay(id, date) {
     let userWaterData = this.hydroData.find((data) =>
       data.userID === id && data.date === date);
-    return userWaterData.numOunces
+    return userWaterData.numOunces;
   }
 
   returnUserWaterPerWeek(id, dateStart, dateEnd) {
     let userWaterData = this.hydroData.filter((data) => {
-      return data.userID === id
+      return data.userID === id;
     }).filter((data) => {
-      return data.date >= dateStart && data.date <= dateEnd
+      return data.date >= dateStart && data.date <= dateEnd;
     }).map((data) => {
-      return data.numOunces
+      return data.numOunces;
     })
-    return userWaterData
+    return userWaterData;
   }
 
   returnUserWaterThisWeek(id, dateEnd) {
     let weekPrior = dayjs(dateEnd).subtract(1, "week");
     let dateStart = weekPrior.format('YYYY/MM/DD');
     let userWaterData = this.hydroData.filter((data) => {
-      return data.userID === id
+      return data.userID === id;
     }).filter((data) => {
-      return data.date >= dateStart
+      return data.date >= dateStart;
     }).map((data) => {
-      return {date: data.date, ounces: data.numOunces}
+      return {date: data.date, ounces: data.numOunces};
     })
-    console.log(userWaterData)
-    return userWaterData
+    return userWaterData;
   }
 }
 

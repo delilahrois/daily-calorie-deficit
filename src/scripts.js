@@ -3,7 +3,7 @@
 import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
-import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
+import { fetchUsers, fetchHydration, fetchSleep }
   from './fetch';
 import './css/styles.css';
 import './images/turing-logo.png';
@@ -30,7 +30,6 @@ const hydrationTitle = document.querySelector('#hydrationTitle');
 const profileName = document.querySelector('#profileName');
 const sleepMessage = document.querySelector('#sleepMessage');
 const sleepTitle = document.querySelector('#sleepTitle');
-// const stairsMessage = document.querySelector('#stairsMessage');
 const stairTitle = document.querySelector('#stairTitle');
 const stepGoal = document.querySelector('#stepGoal');
 const stepGoalComparisons = document.querySelector('#stepGoalMessage');
@@ -79,13 +78,7 @@ const generateUserInfo = () => {
   updateFirstName();
   fillUserCard();
   updateStepCard();
-  // updateStairsCard();
 }
-
-// const updateDom = () => {
-//   generateUserInfo();
-//   updateDomDay();
-// }
 
 const updateFirstName = () => {
   currentUser = userList.findUser(userList.returnRandomUser());
@@ -102,7 +95,7 @@ const fillUserCard = () => {
 
 const updateStepCard = () => {
   stepGoalComparisons.innerText = `Your step goal: ${currentUser.dailyStepGoal} 
-  Average step goal of all users: ${userList.calculateAverage()}`;
+    Average step goal of all users: ${userList.calculateAverage()}`;
 }
 
 const updateHydroCardDay = () => {
@@ -196,10 +189,6 @@ const updateTitles = (choice) => {
     break;
   }
 }
-
-// const updateStairsCard = () => {
-//   // stairsMessage.innerText = `You've climbed ${} flights of stairs today.`;
-// }
 
 // Event Listeners
 
