@@ -3,39 +3,41 @@
 import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
-import User from '../src/User';
 import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
   from './fetch';
 import './css/styles.css';
 import './images/turing-logo.png';
 
 // Global Variables
-let userList;
+
+const today = '2020/01/22';
 let currentUser;
 let hydroRepo;
 let sleepRepo;
-const today = '2020/01/22';
+let userList;
 
 
 //Query Selectors
 
-const firstName = document.querySelector('#userName');
-const profileName = document.querySelector('#profileName');
+const allTimeBtn = document.querySelector('#allTimeBtn');
+const dayBtn = document.querySelector('#dayBtn');
 const emailAddress = document.querySelector('#emailAddress');
-const stepGoal = document.querySelector('#stepGoal');
+const firstName = document.querySelector('#userName');
 const friendsList = document.querySelector('#friendsList');
-const stepGoalComparisons = document.querySelector('#stepGoalMessage');
+const headerMessage = document.querySelector('#headerMessage');
 const hydrationMessage = document.querySelector('#hydrationMessage');
+const hydrationTitle = document.querySelector('#hydrationTitle');
+const profileName = document.querySelector('#profileName');
 const sleepMessage = document.querySelector('#sleepMessage');
-const stairsMessage = document.querySelector('#stairsMessage');
-const dayBtn = document.querySelector('#dayBtn')
-const weekBtn = document.querySelector('#weekBtn')
-const allTimeBtn = document.querySelector('#allTimeBtn')
-const headerMessage = document.querySelector('#headerMessage')
-const stepTitle = document.querySelector('#stepTitle')
-const hydrationTitle = document.querySelector('#hydrationTitle')
-const sleepTitle = document.querySelector('#sleepTitle')
-const stairTitle = document.querySelector('#stairTitle')
+const sleepTitle = document.querySelector('#sleepTitle');
+// const stairsMessage = document.querySelector('#stairsMessage');
+const stairTitle = document.querySelector('#stairTitle');
+const stepGoal = document.querySelector('#stepGoal');
+const stepGoalComparisons = document.querySelector('#stepGoalMessage');
+const stepTitle = document.querySelector('#stepTitle');
+const weekBtn = document.querySelector('#weekBtn');
+
+
 
 // Functions
 
@@ -57,21 +59,20 @@ const userFetch = () => {
 const hydroFetch = () => {
   fetchHydration().then((data) => {
     hydroRepo = new HydroRepository(data.hydrationData);
-  generateHydro()
-})
+    updateHydroCardDay();
+  })
 }
 
 const sleepFetch = () => {
   fetchSleep().then((data) => {
     sleepRepo = new SleepRepository(data.sleepData);
-    generateSleepyTime()
+    updateSleepCardDay();
   })
 }
 
 const generateUsers = (users) => {
   userList = new UserRepository(users);
   userList.createEachUser();
-  // console.log(userList)
 }
 
 const generateUserInfo = () => {
@@ -96,36 +97,23 @@ const fillUserCard = () => {
   emailAddress.innerText = `${currentUser.email}`;
   stepGoal.innerText = `Your daily step goal is
   ${currentUser.dailyStepGoal}`;
-  friendsList.innerText = `${currentUser.friends}`
+  friendsList.innerText = `${currentUser.friends}`;
 }
 
 const updateStepCard = () => {
-  stepGoalComparisons.innerText = `Your step goal is
-  ${currentUser.dailyStepGoal}- compared to the average step goal of all users:
-   ${userList.calculateAverage()}`;
-}
-
-const generateHydro = (data) => {
-  // hydroRepo = new HydroRepository(data.hydrationData);
-  console.log(hydroRepo, 'hydro repo')
-  updateHydroCardDay()
-}
-
-const generateSleepyTime = (data) => {
-  // sleepRepo = new SleepRepository(data);
-  // console.log(sleepRepo, 'sleep repo')
-  updateSleepCardDay()
+  stepGoalComparisons.innerText = `Your step goal: ${currentUser.dailyStepGoal} 
+  Average step goal of all users: ${userList.calculateAverage()}`;
 }
 
 const updateHydroCardDay = () => {
-  hydrationMessage.innerHTML = ``
+  hydrationMessage.innerHTML = ``;
   hydrationMessage.innerHTML =
   `<p>Today you drank ${hydroRepo.
-    returnUserWaterPerDay(currentUser.id, today)} ounces of water.</p>`
+    returnUserWaterPerDay(currentUser.id, today)} ounces of water.</p>`;
 }
 
 const updateSleepCardDay = () => {
-  sleepMessage.innerHTML = ``
+  sleepMessage.innerHTML = ``;
   sleepMessage.innerHTML = `Last night you slept ${sleepRepo.
     returnByDate(currentUser.id, today, 'hoursSlept')} hours.
     Your average sleep quality score was ${sleepRepo.
@@ -133,76 +121,78 @@ const updateSleepCardDay = () => {
 }
 
 const updateSleepCardWeek = () => {
-  sleepMessage.innerHTML = ``
-  let result = sleepRepo.returnUserSleepThisWeek(currentUser.id, today)
+  sleepMessage.innerHTML = ``;
+  let result = sleepRepo.returnUserSleepThisWeek(currentUser.id, today);
   result.forEach((result) => {
-    sleepMessage.innerHTML += `${result.date}: Hours Slept: ${result.sleeps}, Quality: ${result.quality} <br>`
+    sleepMessage.innerHTML += `${result.date}: Hours Slept: 
+    ${result.sleeps}, Quality: ${result.quality}`;
   })
 }
 
 const updateHydroCardWeek = () => {
-  hydrationMessage.innerHTML = ``
-  let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today)
+  hydrationMessage.innerHTML = ``;
+  let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today);
   result.forEach((result) => {
-    hydrationMessage.innerHTML += `${result.date}: ${result.ounces} ounces <br>`
+    hydrationMessage.innerHTML += `${result.date}: ${result.ounces} ounces`;
   })
 }
 
 const updateSleepCardAllTime = () => {
-  sleepMessage.innerHTML = ``
-  let resultHours = sleepRepo.returnDailyAvg(currentUser.id, 'hoursSlept')
-  let resultQuality = sleepRepo.returnDailyAvg(currentUser.id, 'sleepQuality')
-  sleepMessage.innerHTML = `Your total average hours for all time are: ${resultHours} <br>
-  Your total average sleep quality is: ${resultQuality}`
+  sleepMessage.innerHTML = ``;
+  let resultHours = sleepRepo.returnDailyAvg(currentUser.id, 'hoursSlept');
+  let resultQuality = sleepRepo.returnDailyAvg(currentUser.id, 'sleepQuality');
+  sleepMessage.innerHTML = `Your total average hours for all time are: 
+    ${resultHours} Your total average sleep quality is: ${resultQuality}`;
 }
 
 const updateHydroCardAllTime = () => {
-  hydrationMessage.innerHTML = ``
-  let result = hydroRepo.returnUserAvgPerDay(currentUser.id)
-  hydrationMessage.innerHTML = `Your total average ounces of water drank per day is: ${result}.`
+  hydrationMessage.innerHTML = ``;
+  let result = hydroRepo.returnUserAvgPerDay(currentUser.id);
+  hydrationMessage.innerHTML = `Your total average ounces of water drank 
+    per day is: ${result}.`;
 }
 
 const updateDomDay = () => {
   updateHydroCardDay();
   updateSleepCardDay();
-  updateTitles('Day')
+  updateTitles('Day');
 }
 
 const updateDomWeek = () => {
   updateHydroCardWeek();
   updateSleepCardWeek();
-  updateTitles('Week')
+  updateTitles('Week');
 }
 
 const updateDomAllTime = () => {
-updateHydroCardAllTime();
-updateSleepCardAllTime();
-updateTitles('All Time')
+  updateHydroCardAllTime();
+  updateSleepCardAllTime();
+  updateTitles('All Time');
 }
 
 const updateHeaderDate = () => {
-  headerMessage.innerText = `Here's today ${today}, at a glance.`
+  headerMessage.innerText = `Here's today ${today} at a glance.`;
 }
 
 const updateTitles = (choice) => {
-  switch (choice) {
-    case 'Day':
-    stepTitle.innerText = `Steps (Today)`
-    hydrationTitle.innerText = `Hydration (Today)`
-    stairTitle.innerText = `Stairs (Today)`
-    sleepTitle.innerText = `Sleep (Today)`
+  switch (choice) { 
+  case 'Day':
+    stepTitle.innerText = `Steps (Today)`;
+    hydrationTitle.innerText = `Hydration (Today)`;
+    stairTitle.innerText = `Stairs (Today)`;
+    sleepTitle.innerText = `Sleep (Today)`;
     break;
-    case 'Week':
+  case 'Week':
     stepTitle.innerText = `Steps (Last Week)`
     hydrationTitle.innerText = `Hydration (Last Week)`
     stairTitle.innerText = `Stairs (Last Week)`
     sleepTitle.innerText = `Sleep (Last Week)`
     break;
-    case 'All Time':
-    stepTitle.innerText = `Steps (All Time)`
-    hydrationTitle.innerText = `Hydration (All Time)`
-    stairTitle.innerText = `Stairs (All Time)`
-    sleepTitle.innerText = `Sleep (All Time)`
+  case 'All Time':
+    stepTitle.innerText = `Steps (All Time)`;
+    hydrationTitle.innerText = `Hydration (All Time)`;
+    stairTitle.innerText = `Stairs (All Time)`;
+    sleepTitle.innerText = `Sleep (All Time)`;
     break;
   }
 }
@@ -212,11 +202,9 @@ const updateTitles = (choice) => {
 // }
 
 // Event Listeners
-window.addEventListener('load', pageLoad);
-weekBtn.addEventListener('click', updateDomWeek)
-dayBtn.addEventListener('click', updateDomDay)
-allTimeBtn.addEventListener('click', updateDomAllTime)
 
-function testFunction() {
-  console.log('hey!')
-}
+window.addEventListener('load', pageLoad);
+weekBtn.addEventListener('click', updateDomWeek);
+dayBtn.addEventListener('click', updateDomDay);
+allTimeBtn.addEventListener('click', updateDomAllTime);
+
