@@ -32,6 +32,10 @@ const dayBtn = document.querySelector('#dayBtn')
 const weekBtn = document.querySelector('#weekBtn')
 const allTimeBtn = document.querySelector('#allTimeBtn')
 const headerMessage = document.querySelector('#headerMessage')
+const stepTitle = document.querySelector('#stepTitle')
+const hydrationTitle = document.querySelector('#hydrationTitle')
+const sleepTitle = document.querySelector('#sleepTitle')
+const stairTitle = document.querySelector('#stairTitle')
 
 // Functions
 
@@ -40,6 +44,7 @@ const pageLoad = () => {
   hydroFetch();
   sleepFetch();
   updateHeaderDate();
+  updateDomDay();
 }
 
 const userFetch = () => {
@@ -76,10 +81,10 @@ const generateUserInfo = () => {
   // updateStairsCard();
 }
 
-const updateDom = () => {
-  generateUserInfo();
-  updateDomDay();
-}
+// const updateDom = () => {
+//   generateUserInfo();
+//   updateDomDay();
+// }
 
 const updateFirstName = () => {
   currentUser = userList.findUser(userList.returnRandomUser());
@@ -160,20 +165,46 @@ const updateHydroCardAllTime = () => {
 const updateDomDay = () => {
   updateHydroCardDay();
   updateSleepCardDay();
+  updateTitles('Day')
 }
 
 const updateDomWeek = () => {
   updateHydroCardWeek();
   updateSleepCardWeek();
+  updateTitles('Week')
 }
 
 const updateDomAllTime = () => {
 updateHydroCardAllTime();
 updateSleepCardAllTime();
+updateTitles('All Time')
 }
 
 const updateHeaderDate = () => {
   headerMessage.innerText = `Here's today ${today}, at a glance.`
+}
+
+const updateTitles = (choice) => {
+  switch (choice) {
+    case 'Day':
+    stepTitle.innerText = `Steps (Today)`
+    hydrationTitle.innerText = `Hydration (Today)`
+    stairTitle.innerText = `Stairs (Today)`
+    sleepTitle.innerText = `Sleep (Today)`
+    break;
+    case 'Week':
+    stepTitle.innerText = `Steps (Last Week)`
+    hydrationTitle.innerText = `Hydration (Last Week)`
+    stairTitle.innerText = `Stairs (Last Week)`
+    sleepTitle.innerText = `Sleep (Last Week)`
+    break;
+    case 'All Time':
+    stepTitle.innerText = `Steps (All Time)`
+    hydrationTitle.innerText = `Hydration (All Time)`
+    stairTitle.innerText = `Stairs (All Time)`
+    sleepTitle.innerText = `Sleep (All Time)`
+    break;
+  }
 }
 
 // const updateStairsCard = () => {

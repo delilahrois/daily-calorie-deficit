@@ -12,7 +12,7 @@ class HydroRepository {
     let result = userWaterData.reduce((acc, item) => {
       return acc += item.numOunces;
     }, 0) / userWaterData.length
-    return result
+    return Math.round(100*result)/100
   }
 
   returnUserWaterPerDay(id, date) {
