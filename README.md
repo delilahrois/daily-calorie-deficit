@@ -13,8 +13,8 @@ Mod1 2108 FE
   - [Project Specs](#project-specs)
 
 ## Install + Setup
-    - clone this repo: https://github.com/delilahrois/daily-calorie-deficit
-    - On the command line, type: **$ open index.html**
+   - clone this repo: [here]https://github.com/delilahrois/daily-calorie-deficit
+   - On the command line, type: **$ open index.html**
 
 ## Project Specs
     - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/Fitlit-part-one.html)
