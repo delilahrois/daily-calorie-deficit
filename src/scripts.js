@@ -97,7 +97,16 @@ const fillUserCard = () => {
   emailAddress.innerText = `${currentUser.email}`;
   stepGoal.innerText = `Your daily step goal is
   ${currentUser.dailyStepGoal}`;
-  friendsList.innerText = `${currentUser.friends}`;
+  updateFriendsList();
+}
+
+const updateFriendsList = () => {
+  let friendNames = [];
+  currentUser.friends.forEach((friend) => {
+    let singleFriend = userList.findUser(friend);
+    friendNames.push(singleFriend.name.split(" ")[0])
+  });
+  friendsList.innerText = `Your friends: ${friendNames.join(', ')}`;
 }
 
 const updateStepCard = () => {
