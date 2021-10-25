@@ -8,12 +8,12 @@ Mod1 2108 FE
   - [Architecture](#architecture)
   - [Technologies](#technologies)
   - [Contributors](#contributors)
-	- [Wins](#wins)
-	- [Challenges + Improvements](#challenges-+-Improvements)
+  - [Wins](#wins)
+  - [Challenges + Improvements](#challenges-+-Improvements)
   - [Project Specs](#project-specs)
 
 ## Install + Setup
-    - clone this repo: https://github.com/colganmeanor/colgan-tic-tac-toe
+    - clone this repo: https://github.com/delilahrois/daily-calorie-deficit
     - On the command line, type: **$ open index.html**
 
 ## Project Specs
