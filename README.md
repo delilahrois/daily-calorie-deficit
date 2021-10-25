@@ -17,8 +17,8 @@ Mod1 2108 FE
    - On the command line, type: **$ open index.html**
 
 ## Project Specs
-    - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/Fitlit-part-one.html)
-    - Our deployed page can be found ***Deploy Link will Go Here Soon***
+   - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/Fitlit-part-one.html)
+   - Our deployed page can be found ***Deploy Link will Go Here Soon***
 
 
 
