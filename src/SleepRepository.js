@@ -1,5 +1,5 @@
-var dayjs = require('dayjs')
-dayjs().format()
+var dayjs = require('dayjs');
+dayjs().format();
 
 class SleepRepository {
   constructor(sleepData) {
@@ -17,7 +17,7 @@ class SleepRepository {
         return acc += sleep.hoursSlept;
       }
     }, 0) / totalSleep.length;
-    return Math.round(100*result)/100;
+    return Math.round(100 * result) / 100;
   }
 
   returnByDate(id, date, property) {
@@ -59,12 +59,12 @@ class SleepRepository {
     let userSleepData = this.sleeps.filter((data) => {
       return data.userID === id
     }).filter((data) => {
-      return data.date >= dateStart
+      return data.date >= dateStart;
     }).map((data) => {
-      return {date: data.date, sleeps: data.hoursSlept, quality: data.sleepQuality}
+      return {date: data.date, sleeps: data.hoursSlept, 
+        quality: data.sleepQuality};
     })
-    // console.log(userSleepData)
-    return userSleepData
+    return userSleepData;
   }
 }
 
