@@ -13,7 +13,7 @@ Mod1 2108 FE
   - [Project Specs](#project-specs)
 
 ## Install + Setup
-   - clone this repo: [here]https://github.com/delilahrois/daily-calorie-deficit
+   - clone this repo: [here](https://github.com/delilahrois/daily-calorie-deficit)
    - On the command line, type: **$ open index.html**
 
 ## Project Specs
