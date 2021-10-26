@@ -14,7 +14,8 @@ Mod1 2108 FE
 
 ## Install + Setup
    - clone this repo: [here](https://github.com/delilahrois/daily-calorie-deficit)
-   - On the command line, type: **$ open index.html**
+   - On the command line, type: **$ npm install**
+   - On the command line, type: **$ npm start**
 
 ## Project Specs
    - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/Fitlit-part-one.html)
@@ -23,11 +24,22 @@ Mod1 2108 FE
 
 
 ## Abstract
+
+![Screen Shot 2021-10-25 at 7 22 51 PM](https://user-images.githubusercontent.com/87510749/138788469-5777ef5e-ca69-423c-91bc-37b26df6f4a1.png)
+
+
   This project is designed as a Web Dashboard fitness app that keeps track of user data relating to their various fitness activities. Currently, upon page load, the user will be shown data from a randomly chosen user that currently exists in the user database.
 
   The cards shown on the page will default to showing Today's data (2020/01/20). However, on the left side menu of the page: the user has the ability to choose from Today's data, Last Week's data, and average data from All Time. The data shown on each card can be altered by clicking the buttons on the left side that correspond to the data set you'd like to view.
 
+
+https://user-images.githubusercontent.com/87510749/138788504-0962c3da-808d-4116-85c6-a8b90ae9c835.mov
+
+
   The goals of the project were to be able to successfully pull in data from third party APIs, and use class methods to extrapolate and make calculations on the overall data set to show a user specific stats pulled from their overall data, such as average hours slept per day per user, or ounces of water drank each day for the past seven days. In addition, TDD, was implemented as each of these classes and methods were built out along the way, to ensure that our logic in our Javascript functions as expected with minimal bugs or errors.
+  
+  ![Screen Shot 2021-10-25 at 7 23 02 PM](https://user-images.githubusercontent.com/87510749/138788486-f6e22feb-cf42-48d4-aa69-1d49dd1ff35c.png)
+
 
 ## Architecture
   Our version of the FitLit project pulls all of its data from a third party API provided by our instructors. On page load, we perform a fetch call for all relevant data sets and instantiate each set of data as its relevant class, to be able to call our calculation methods. For example, the user data from our API is instantiated as a new User Repository class, and each individual user within that data is also instantiated as a new User class.
