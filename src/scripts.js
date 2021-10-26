@@ -108,7 +108,7 @@ const updateHydroCardDay = () => {
 const updateSleepCardDay = () => {
   sleepMessage.innerHTML = ``;
   sleepMessage.innerHTML = `Last night you slept ${sleepRepo.
-    returnByDate(currentUser.id, today, 'hoursSlept')} hours.
+    returnByDate(currentUser.id, today, 'hoursSlept')} hours. <br>
     Your average sleep quality score was ${sleepRepo.
     returnByDate(currentUser.id, today, 'sleepQuality')}`;
 }
@@ -117,8 +117,8 @@ const updateSleepCardWeek = () => {
   sleepMessage.innerHTML = ``;
   let result = sleepRepo.returnUserSleepThisWeek(currentUser.id, today);
   result.forEach((result) => {
-    sleepMessage.innerHTML += `${result.date}: Hours Slept: 
-    ${result.sleeps}, Quality: ${result.quality}`;
+    sleepMessage.innerHTML += `${result.date}: Hours Slept:
+    ${result.sleeps}, Quality: ${result.quality} <br>`;
   })
 }
 
@@ -126,7 +126,8 @@ const updateHydroCardWeek = () => {
   hydrationMessage.innerHTML = ``;
   let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today);
   result.forEach((result) => {
-    hydrationMessage.innerHTML += `${result.date}: ${result.ounces} ounces`;
+    hydrationMessage.innerHTML += `${result.date}: 
+      ${result.ounces} ounces <br>`;
   })
 }
 
@@ -134,8 +135,8 @@ const updateSleepCardAllTime = () => {
   sleepMessage.innerHTML = ``;
   let resultHours = sleepRepo.returnDailyAvg(currentUser.id, 'hoursSlept');
   let resultQuality = sleepRepo.returnDailyAvg(currentUser.id, 'sleepQuality');
-  sleepMessage.innerHTML = `Your total average hours for all time are: 
-    ${resultHours} Your total average sleep quality is: ${resultQuality}`;
+  sleepMessage.innerHTML = `Your total average hours for all time are:
+    ${resultHours} <br> Your total average sleep quality is: ${resultQuality}`;
 }
 
 const updateHydroCardAllTime = () => {

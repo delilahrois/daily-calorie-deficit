@@ -21,6 +21,7 @@ body, html {
   border-radius: 5px;
   padding: 5px 10px;
   margin: 20px;
+  font-size: larger;
 }
 
 main {
@@ -43,7 +44,9 @@ aside {
 
 .main-nav-bar {
   width: 8%;
-  margin-left: 10px;
+  margin-left: 0px;
+  display: flex;
+  
 }
 
 /* header  */
@@ -52,10 +55,11 @@ aside {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 20%;
+  height: 15%;
   font-weight: bolder;
   background-color: #49A078;
   margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .header-container {

@@ -54,10 +54,10 @@ class SleepRepository {
   }
 
   returnUserSleepThisWeek(id, dateEnd) {
-    let weekPrior = dayjs(dateEnd).subtract(1, "week");
+    let weekPrior = dayjs(dateEnd).subtract(6, "days");
     let dateStart = weekPrior.format('YYYY/MM/DD');
     let userSleepData = this.sleeps.filter((data) => {
-      return data.userID === id
+      return data.userID === id;
     }).filter((data) => {
       return data.date >= dateStart;
     }).map((data) => {
