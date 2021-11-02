@@ -199,7 +199,7 @@ describe('HydroRepository', () => {
   });
 
   it('should return users avg fl oz consumed per day for all time', () => {
-    expect(hydro.returnUserAvgPerDay(1)).to.equal(64.85714285714286);
+    expect(hydro.returnUserAvgPerDay(1)).to.equal(64.86);
   });
 
   it('should return how many fluid ounces user consumed for a day', () => {
