@@ -4,7 +4,7 @@ import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
 import { fetchUsers, fetchHydration, fetchSleep }
-  from './fetch';
+  from './apiCalls';
 import './css/styles.css';
 import './images/turing-logo.png';
 
