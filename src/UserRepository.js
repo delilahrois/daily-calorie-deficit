@@ -22,9 +22,9 @@ class UserRepository {
   }
 
   calculateAverage() {
-    let average = this.createdUsers.reduce((acc, elem) => {
-      let sum = acc + elem.dailyStepGoal;
-      return sum;
+    let average = this.createdUsers.reduce((sum, elem) => {
+      let total = sum + elem.dailyStepGoal;
+      return total;
     }, 0)
     return average / this.createdUsers.length;
   }

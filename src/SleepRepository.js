@@ -10,11 +10,11 @@ class SleepRepository {
     const totalSleep = this.sleeps.filter((sleep) => {
       return sleep.userID === id;
     })
-    const result = totalSleep.reduce((acc, sleep) => {
+    const result = totalSleep.reduce((sum, sleep) => {
       if (property === 'sleepQuality') {
-        return acc += sleep.sleepQuality;
+        return sum += sleep.sleepQuality;
       } else {
-        return acc += sleep.hoursSlept;
+        return sum += sleep.hoursSlept;
       }
     }, 0) / totalSleep.length;
     return Math.round(100 * result) / 100;
@@ -47,8 +47,8 @@ class SleepRepository {
   }
 
   totalAvgSleepQual() {
-    const result = this.sleeps.reduce((acc, sleep) => {
-      return acc += sleep.sleepQuality;
+    const result = this.sleeps.reduce((sum, sleep) => {
+      return sum += sleep.sleepQuality;
     }, 0) / this.sleeps.length;
     return result;
   }

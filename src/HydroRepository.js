@@ -9,8 +9,8 @@ class HydroRepository {
     let userWaterData = this.hydroData.filter((data) => {
       return data.userID === id;
     })
-    let result = userWaterData.reduce((acc, item) => {
-      return acc += item.numOunces;
+    let result = userWaterData.reduce((sum, item) => {
+      return sum += item.numOunces;
     }, 0) / userWaterData.length;
     return Math.round(100 * result) / 100;
   }
