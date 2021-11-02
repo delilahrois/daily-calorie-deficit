@@ -234,12 +234,12 @@ describe('SleepRepository', () => {
   });
 
   it('should calculate average daily hrs slept by user ID', () => {
-    expect(sleepRepo.returnDailyAvg(4)).to.equal(7.057142857142858);
+    expect(sleepRepo.returnDailyAvg(4)).to.equal(7.06);
   })
 
   it('should calculate average daily sleepQuality by user ID', () => {
     expect(sleepRepo.returnDailyAvg(1, 'sleepQuality')).
-      to.equal(2.614285714285714);
+      to.equal(2.61);
   });
 
   it('should find hours slept on a given date', () => {
