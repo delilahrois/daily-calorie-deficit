@@ -3,6 +3,7 @@
 import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
+import ActivityRepository from './ActivityRepository';
 import { fetchUsers, fetchHydration, fetchSleep, fetchData }
   from './apiCalls';
 import './css/styles.css';
@@ -14,6 +15,7 @@ const today = '2020/01/22';
 let currentUser;
 let hydroRepo;
 let sleepRepo;
+let activityRepo;
 let userList;
 
 
@@ -42,10 +44,11 @@ const weekBtn = document.querySelector('#weekBtn');
 
 const pageLoad = () => {
   userFetch();
+  activityFetch();
   hydroFetch();
   sleepFetch();
   updateHeaderDate();
-  updateDomDay();
+  // updateDomDay();
 }
 
 const userFetch = () => {
@@ -58,14 +61,20 @@ const userFetch = () => {
 const hydroFetch = () => {
   fetchData('hydration').then((data) => {
     hydroRepo = new HydroRepository(data.hydrationData);
-    updateHydroCardDay();
+    updateDomDay();
   })
 }
 
 const sleepFetch = () => {
   fetchData('sleep').then((data) => {
     sleepRepo = new SleepRepository(data.sleepData);
-    updateSleepCardDay();
+    updateDomDay();
+  })
+}
+
+const activityFetch = () => {
+  fetchData('activity').then((data) => {
+    activityRepo = new ActivityRepository(data.activityData);
   })
 }
 
@@ -77,7 +86,7 @@ const generateUsers = (users) => {
 const generateUserInfo = () => {
   updateFirstName();
   fillUserCard();
-  updateStepCard();
+  // updateStepCardDay();
 }
 
 const updateFirstName = () => {
@@ -102,8 +111,10 @@ const updateFriendsList = () => {
   friendsList.innerText = `Your friends: ${friendNames.join(', ')}`;
 }
 
-const updateStepCard = () => {
-  stepGoalComparisons.innerText = `Your step goal: ${currentUser.dailyStepGoal}
+const updateStepCardDay = () => {
+  stepGoalComparisons.innerHTML = `
+  You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today <br>
+  Your step goal: ${currentUser.dailyStepGoal}
     Average step goal of all users: ${userList.calculateAverage()}`;
 }
 
@@ -158,6 +169,7 @@ const updateHydroCardAllTime = () => {
 const updateDomDay = () => {
   updateHydroCardDay();
   updateSleepCardDay();
+  updateStepCardDay();
   updateTitles('Day');
 }
 
