@@ -3,7 +3,7 @@
 import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
-import { fetchUsers, fetchHydration, fetchSleep }
+import { fetchUsers, fetchHydration, fetchSleep, fetchData }
   from './apiCalls';
 import './css/styles.css';
 import './images/turing-logo.png';
@@ -49,21 +49,21 @@ const pageLoad = () => {
 }
 
 const userFetch = () => {
-  fetchUsers().then((users) => {
-    generateUsers(users.userData);
+  fetchData('users').then((data) => {
+    generateUsers(data.userData);
     generateUserInfo();
   })
 }
 
 const hydroFetch = () => {
-  fetchHydration().then((data) => {
+  fetchData('hydration').then((data) => {
     hydroRepo = new HydroRepository(data.hydrationData);
     updateHydroCardDay();
   })
 }
 
 const sleepFetch = () => {
-  fetchSleep().then((data) => {
+  fetchData('sleep').then((data) => {
     sleepRepo = new SleepRepository(data.sleepData);
     updateSleepCardDay();
   })
@@ -103,7 +103,7 @@ const updateFriendsList = () => {
 }
 
 const updateStepCard = () => {
-  stepGoalComparisons.innerText = `Your step goal: ${currentUser.dailyStepGoal} 
+  stepGoalComparisons.innerText = `Your step goal: ${currentUser.dailyStepGoal}
     Average step goal of all users: ${userList.calculateAverage()}`;
 }
 
@@ -135,7 +135,7 @@ const updateHydroCardWeek = () => {
   hydrationMessage.innerHTML = ``;
   let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today);
   result.forEach((result) => {
-    hydrationMessage.innerHTML += `${result.date}: 
+    hydrationMessage.innerHTML += `${result.date}:
       ${result.ounces} ounces <br>`;
   })
 }
@@ -151,7 +151,7 @@ const updateSleepCardAllTime = () => {
 const updateHydroCardAllTime = () => {
   hydrationMessage.innerHTML = ``;
   let result = hydroRepo.returnUserAvgPerDay(currentUser.id);
-  hydrationMessage.innerHTML = `Your total average ounces of water drank 
+  hydrationMessage.innerHTML = `Your total average ounces of water drank
     per day is: ${result}.`;
 }
 
@@ -178,7 +178,7 @@ const updateHeaderDate = () => {
 }
 
 const updateTitles = (choice) => {
-  switch (choice) { 
+  switch (choice) {
   case 'Day':
     stepTitle.innerText = `Steps (Today)`;
     hydrationTitle.innerText = `Hydration (Today)`;
@@ -206,4 +206,3 @@ window.addEventListener('load', pageLoad);
 weekBtn.addEventListener('click', updateDomWeek);
 dayBtn.addEventListener('click', updateDomDay);
 allTimeBtn.addEventListener('click', updateDomAllTime);
-
