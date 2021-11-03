@@ -1,27 +1,27 @@
-// const fetchData = (data) => {
-//   return fetch(`https://pacific-badlands-43237.herokuapp.com/api/v1/${data}`)
-//     .then(response => response.json())
-// }
+const fetchData = (data) => {
+  return fetch(`http://localhost:3001/api/v1/${data}`)
+    .then(response => response.json())
+}
 
 
 const fetchUsers = () => {
-  return fetch("https://pacific-badlands-43237.herokuapp.com/api/v1/users")
+  return fetch("http://localhost:3001/api/v1/users")
     .then(response => response.json())
 }
 
 const fetchHydration = () => {
-  return fetch('https://pacific-badlands-43237.herokuapp.com/api/v1/hydration')
+  return fetch('http://localhost:3001/api/v1/hydration')
     .then(response => response.json())
 }
 
 const fetchSleep = () => {
-  return fetch('https://pacific-badlands-43237.herokuapp.com/api/v1/sleep')
+  return fetch('http://localhost:3001/api/v1/sleep')
     .then(response => response.json())
 }
 
 const fetchActivityData = () => {
-  return fetch('https://pacific-badlands-43237.herokuapp.com/api/v1/activity')
+  return fetch('http://localhost:3001/api/v1/activity')
     .then(response => response.json())
 }
 
-module.exports = {fetchUsers, fetchHydration, fetchSleep, fetchActivityData};
+module.exports = {fetchData, fetchUsers, fetchHydration, fetchSleep, fetchActivityData};
