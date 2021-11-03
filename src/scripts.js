@@ -4,7 +4,7 @@ import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
 import ActivityRepository from './ActivityRepository';
-import { fetchUsers, fetchHydration, fetchSleep, fetchData }
+import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
   from './apiCalls';
 import './css/styles.css';
 import './images/turing-logo.png';
@@ -43,44 +43,40 @@ const weekBtn = document.querySelector('#weekBtn');
 // Functions
 
 const pageLoad = () => {
-  userFetch();
-  activityFetch();
-  hydroFetch();
-  sleepFetch();
+  fetchData();
   updateHeaderDate();
-  // updateDomDay();
 }
 
-const userFetch = () => {
-  fetchData('users').then((data) => {
-    generateUsers(data.userData);
+const fetchData = () => {
+  Promise.all([fetchUsers, fetchHydration, fetchSleep, fetchActivityData]).then(values => {
+    return Promise.all(values.map(result => result.json()));
+  }).then(values => {
+    generateUsers(values[0].userData)
     generateUserInfo();
+    generateHydro(values[1].hydrationData)
+    generateSleep(values[2].sleepData)
+    generateActivity(values[3].activityData)
+    updateDomDay()
   })
 }
 
-const hydroFetch = () => {
-  fetchData('hydration').then((data) => {
-    hydroRepo = new HydroRepository(data.hydrationData);
-    updateDomDay();
-  })
-}
 
-const sleepFetch = () => {
-  fetchData('sleep').then((data) => {
-    sleepRepo = new SleepRepository(data.sleepData);
-    updateDomDay();
-  })
-}
-
-const activityFetch = () => {
-  fetchData('activity').then((data) => {
-    activityRepo = new ActivityRepository(data.activityData);
-  })
-}
 
 const generateUsers = (users) => {
   userList = new UserRepository(users);
   userList.createEachUser();
+}
+
+const generateHydro = (data) => {
+  hydroRepo = new HydroRepository(data)
+}
+
+const generateSleep = (data) => {
+  sleepRepo = new SleepRepository(data)
+}
+
+const generateActivity = (data) => {
+  activityRepo = new ActivityRepository(data)
 }
 
 const generateUserInfo = () => {
