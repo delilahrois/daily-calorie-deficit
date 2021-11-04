@@ -3,7 +3,8 @@
 import UserRepository from './UserRepository';
 import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
-import { fetchUsers, fetchHydration, fetchSleep, fetchData }
+import ActivityRepository from './ActivityRepository';
+import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
   from './apiCalls';
 import './css/styles.css';
 import './images/turing-logo.png';
@@ -14,6 +15,7 @@ const today = '2020/01/22';
 let currentUser;
 let hydroRepo;
 let sleepRepo;
+let activityRepo;
 let userList;
 
 
@@ -41,43 +43,46 @@ const weekBtn = document.querySelector('#weekBtn');
 // Functions
 
 const pageLoad = () => {
-  userFetch();
-  hydroFetch();
-  sleepFetch();
+  fetchData();
   updateHeaderDate();
-  updateDomDay();
 }
 
-const userFetch = () => {
-  fetchData('users').then((data) => {
-    generateUsers(data.userData);
+const fetchData = () => {
+  Promise.all([fetchUsers, fetchHydration, fetchSleep, fetchActivityData]).then(values => {
+    return Promise.all(values.map(result => result.json()));
+  }).then(values => {
+    generateUsers(values[0].userData)
     generateUserInfo();
+    generateHydro(values[1].hydrationData)
+    generateSleep(values[2].sleepData)
+    generateActivity(values[3].activityData)
+    updateDomDay()
   })
 }
 
-const hydroFetch = () => {
-  fetchData('hydration').then((data) => {
-    hydroRepo = new HydroRepository(data.hydrationData);
-    updateHydroCardDay();
-  })
-}
 
-const sleepFetch = () => {
-  fetchData('sleep').then((data) => {
-    sleepRepo = new SleepRepository(data.sleepData);
-    updateSleepCardDay();
-  })
-}
 
 const generateUsers = (users) => {
   userList = new UserRepository(users);
   userList.createEachUser();
 }
 
+const generateHydro = (data) => {
+  hydroRepo = new HydroRepository(data)
+}
+
+const generateSleep = (data) => {
+  sleepRepo = new SleepRepository(data)
+}
+
+const generateActivity = (data) => {
+  activityRepo = new ActivityRepository(data)
+}
+
 const generateUserInfo = () => {
   updateFirstName();
   fillUserCard();
-  updateStepCard();
+  // updateStepCardDay();
 }
 
 const updateFirstName = () => {
@@ -102,8 +107,10 @@ const updateFriendsList = () => {
   friendsList.innerText = `Your friends: ${friendNames.join(', ')}`;
 }
 
-const updateStepCard = () => {
-  stepGoalComparisons.innerText = `Your step goal: ${currentUser.dailyStepGoal}
+const updateStepCardDay = () => {
+  stepGoalComparisons.innerHTML = `
+  You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today <br>
+  Your step goal: ${currentUser.dailyStepGoal}
     Average step goal of all users: ${userList.calculateAverage()}`;
 }
 
@@ -158,6 +165,7 @@ const updateHydroCardAllTime = () => {
 const updateDomDay = () => {
   updateHydroCardDay();
   updateSleepCardDay();
+  updateStepCardDay();
   updateTitles('Day');
 }
 

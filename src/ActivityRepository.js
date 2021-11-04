@@ -7,6 +7,13 @@ class ActivityRepository {
     this.activities = activityData;
   }
 
+returnStepsPerDay(id, date) {
+  let stepsToday = this.activities.find((activity) => {
+    return activity.userID === id && activity.date === date
+  })
+  return stepsToday.numSteps
+}
+
   returnMilesByDate(id, strideLength, date) {
 
     let userActivity = this.activities.find((activity) => {
@@ -60,7 +67,7 @@ class ActivityRepository {
       return activity.userID === id
     }).sort((a,b) => {
       return b.flightsOfStairs - a.flightsOfStairs;
-    }) 
+    })
     return highestStepCount[0].flightsOfStairs;
   }
 
@@ -81,7 +88,7 @@ class ActivityRepository {
     sumForAllUsers.minutes = sumForAllUsers.minutes / totalDays;
     return sumForAllUsers;
   }
-    
+
 }
 
 module.exports = ActivityRepository;

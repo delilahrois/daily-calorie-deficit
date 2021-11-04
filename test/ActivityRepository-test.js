@@ -4,7 +4,7 @@ import UserRepository from '../src/UserRepository';
 // import User from '../src/User';
 
 describe('ActivityRepository', () => {
-  let userRepo; 
+  let userRepo;
   let activityRepo;
   let activities;
   let users;
@@ -147,14 +147,14 @@ describe('ActivityRepository', () => {
         "numSteps": 8429,
         "minutesActive": 275,
         "flightsOfStairs": 2
-      }, 
+      },
       {
         "userID": 1,
         "date": "2019/06/20",
         "numSteps": 14478,
         "minutesActive": 140,
         "flightsOfStairs": 12
-      },    
+      },
       {
         "userID": 1,
         "date": "2019/06/21",
@@ -180,6 +180,10 @@ describe('ActivityRepository', () => {
   it('should calculate miles walked in a day', () => {
     expect(activities.returnMilesByDate(1, 4.3, "2019/06/15")).to.equal(2.91)
   });
+
+  it('should return the number of steps per day', () => {
+    expect(activities.returnStepsPerDay(1, "2019/06/15")).to.equal(3577)
+  })
 
   it('should be able to calculate how many minutes active for a given day', () => {
     expect(activities.returnActiveMinutes(1, '2019/06/15')).to.equal(140)
