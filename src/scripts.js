@@ -6,8 +6,9 @@ import SleepRepository from './SleepRepository';
 import ActivityRepository from './ActivityRepository';
 import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
   from './apiCalls';
-import './css/styles.css';
+import './css/styles.scss';
 import './images/turing-logo.png';
+
 
 // Global Variables
 
