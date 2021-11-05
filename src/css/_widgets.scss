@@ -1,0 +1,46 @@
+@mixin cardStyles($path) {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url($path);
+  background-size:cover;
+}
+
+// added new classes in index.html instead of using ID for this style targeting.
+// attempting to nest these "sub-classes" for each "main-widget" inside the
+// main-widget class. And also attempting to implement @mixin with an argument of the image path.
+// also added in the backgroun images here for each card into the images directory
+// in an attempt to bring the files directly into the project rather than use the URL
+
+.main-widget {
+  border-radius: 5px;
+  width: 400px;
+  height: 30%;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #dce1de;
+  opacity: 100%;
+
+  // .main-widget .steps {
+  //   @include cardStyles('../images/fitlit-steps.png');
+  // }
+
+}
+
+#sleepWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(https://cache.desktopnexus.com/thumbseg/1538/1538054-bigthumbnail.jpg);
+  background-size:cover;
+}
+
+#waterWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(https://vsthemes.org/uploads/posts/2021-07/1626002744_skrinshot-11-07-2021-16_24_24.png);
+  background-size: cover;
+}
+
+
+#stepsWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/fitlit-steps.png');
+  background-size: cover;
+}
+
+#stairsWidget {
+  background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(https://www.wallpaperup.com/uploads/wallpapers/2017/05/23/1090456/9e31c9f73f7d83882f65b0ab9f433d54-700.jpg);
+  background-size: cover;
+}

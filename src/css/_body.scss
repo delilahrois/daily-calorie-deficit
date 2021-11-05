@@ -1,0 +1,45 @@
+// @use 'styles.scss';
+
+$primaryColor: #49A078;
+$secondaryColor: #9cc5a1;
+$tertiaryColor: #216869;
+
+body, html {
+  background-image: linear-gradient(to top, $primaryColor 0%, $secondaryColor 99%, $secondaryColor 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  border: 0;
+  margin: 0 px;
+  font-family: 'Montserrat', sans-serif, bold;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 75%;
+    background-color: #DCE1DE;
+
+    aside {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      background-color: $tertiaryColor;
+
+      .aside-btn {
+        background-color: #dce1de;
+        font-family: 'Montserrat', sans-serif;
+        color: #1f2421;
+        border: 0;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 20px;
+        font-size: larger;
+      }
+    }
+  }
+}
