@@ -29,5 +29,4 @@ const fetchHydration = fetch('http://localhost:3001/api/v1/hydration')
 const fetchSleep = fetch('http://localhost:3001/api/v1/sleep')
 const fetchActivityData = fetch('http://localhost:3001/api/v1/activity')
 
-
 module.exports = { fetchUsers, fetchHydration, fetchSleep, fetchActivityData};

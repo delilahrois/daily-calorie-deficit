@@ -61,6 +61,17 @@ const fetchData = () => {
   })
 }
 
+const postHydro = (data) => {
+  fetch ('http://localhost:3001/api/v1/hydration', {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json', 
+    }, 
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateHydro(data))
+    .catch(error => console.log(error))
+}
 
 
 const generateUsers = (users) => {
@@ -208,6 +219,8 @@ const updateTitles = (choice) => {
     break;
   }
 }
+
+
 
 // Event Listeners
 
