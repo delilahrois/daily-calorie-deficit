@@ -5,8 +5,9 @@ import HydroRepository from './HydroRepository';
 import SleepRepository from './SleepRepository';
 import { fetchUsers, fetchHydration, fetchSleep, fetchData }
   from './apiCalls';
-import './css/styles.css';
+import './css/styles.scss';
 import './images/turing-logo.png';
+
 
 // Global Variables
 
