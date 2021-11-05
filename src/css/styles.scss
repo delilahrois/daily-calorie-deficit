@@ -137,3 +137,7 @@ body, html {
     background-attachment: fixed;
     filter: blur(12px);
   }
+
+  .hidden {
+    display: none!important;
+  }
