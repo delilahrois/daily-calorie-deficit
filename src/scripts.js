@@ -61,6 +61,41 @@ const fetchData = () => {
   })
 }
 
+const postHydro = (data) => {
+  fetch ('http://localhost:3001/api/v1/hydration', {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json', 
+    }, 
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateHydro(data))
+    .catch(error => console.log(error))
+}
+
+const postSleep = (data) => {
+  fetch ('http://localhost:3001/api/v1/sleep', {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json', 
+    }, 
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateSleep(data))
+    .catch(error => console.log(error))
+}
+
+const postActivity = (data) => {
+  fetch ('http://localhost:3001/api/v1/activity', {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json', 
+    }, 
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateActivity(data))
+    .catch(error => console.log(error))
+}
 
 
 const generateUsers = (users) => {
@@ -208,6 +243,8 @@ const updateTitles = (choice) => {
     break;
   }
 }
+
+
 
 // Event Listeners
 
