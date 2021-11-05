@@ -1,6 +1,7 @@
 $primaryColor: #49A078;
 $secondaryColor: #9cc5a1;
 $tertiaryColor: #216869;
+@use 'src/css/_header.scss';
 
 body, html {
     background-image: linear-gradient(to top, $primaryColor 0%, $secondaryColor 99%, $secondaryColor 100%);
@@ -15,7 +16,7 @@ body, html {
     flex-direction: column;
 }
   
-  .aside-btn {
+.aside-btn {
     background-color: #dce1de;
     font-family: 'Montserrat', sans-serif;
     color: #1f2421;
@@ -53,29 +54,29 @@ body, html {
   
   /* header  */
   
-  .header {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 15%;
-    font-weight: bolder;
-    background-color: $primaryColor;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-  }
+  // .header {
+  //   display: flex;
+  //   flex-direction: column;
+  //   width: 100%;
+  //   height: 15%;
+  //   font-weight: bolder;
+  //   background-color: $primaryColor;
+  //   margin-bottom: 20px;
+  //   padding-bottom: 20px;
+  // }
   
-  .header-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: larger;
-    margin: 5px 30px;
-  }
+  // .header-container {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  //   font-size: larger;
+  //   margin: 5px 30px;
+  // }
   
-  .header-message {
-    margin-left: 10%;
-    font-size: x-large;
-  }
+  // .header-message {
+  //   margin-left: 10%;
+  //   font-size: x-large;
+  // }
   
   /* main  */
   
