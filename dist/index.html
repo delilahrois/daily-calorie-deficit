@@ -1,73 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
-    <title>Activity Tracker</title>
-  </head>
-  <body>
-    <header class="header">
-      <div class="header-container">
-        <h1 id="userName">Hello, User!</h1>
-        <img id="turingLogo">
-      </div>
-      <div class="header-message" id ="headerMessage">
-        <h2>Here's today 2006/06/06 at a glance.</h2> 
-      </div>
-    </header>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  <title>Activity Tracker</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-container">
+      <h1 id="userName">Hello, User!</h1>
+      <img id="turingLogo">
+    </div>
+    <div class="header-message" id="headerMessage">
+      <h2>Here's today 2006/06/06 at a glance.</h2>
+    </div>
+  </header>
   <main>
-    <aside class="main-nav-bar"> 
+    <aside class="main-nav-bar">
       <div class="aside-btns">
-          <button class="aside-btn" id="dayBtn">Day</button>
-          <button class="aside-btn" id="weekBtn">Week</button>
-          <button class="aside-btn" id="allTimeBtn">All Time</button>
-        </div>
+        <button class="aside-btn" id="dayBtn">Day</button>
+        <button class="aside-btn" id="weekBtn">Week</button>
+        <button class="aside-btn" id="allTimeBtn">All Time</button>
+      </div>
       </div>
     </aside>
     <div class="row1">
-      <section class="main-widget" id="stepsWidget">
+      <section class="main-widget steps" id="stepsWidget">
         <h2 id="stepTitle">Steps (Today)</h2>
-        <p  class="step-goal-message" id="stepGoalMessage">
+        <p class="step-goal-message" id="stepGoalMessage">
         </p>
       </section>
-      <section class="main-widget" id="waterWidget">
+      <section class="main-widget water" id="waterWidget">
         <h2 id="hydrationTitle">Hydration (Today)</h2>
         <p class="hydration-message" id="hydrationMessage">
         </p>
       </section>
     </div>
     <div class="row2">
-    <section class="main-widget" id="sleepWidget">
-      <h2 id="sleepTitle">Sleep(Today)</h2>
-      <p class="sleep-message" id="sleepMessage">
-      </p>
-    </section>
-    <section class="main-widget" id="stairsWidget">
-      <h2 id="stairTitle">Stairs (Today)</h2>
-      <p class="stairs-message" id="stairsMessage">
-      </p>
-    </section>
-  </div>
-  <aside class="main-profile-bar"> 
-    <div>
-      <img class="profile-photo" src="https://thumbs.dreamstime.com/b/default-placeholder-fitness-trainer-t-shirt-half-length-portrait-photo-avatar-gray-color-default-placeholder-fitness-trainer-119457652.jpg" alt ="Gym Karen">
+      <section class="main-widget sleep" id="sleepWidget">
+        <h2 id="sleepTitle">Sleep(Today)</h2>
+        <p class="sleep-message" id="sleepMessage">
+        </p>
+      </section>
+      <section class="main-widget stairs" id="stairsWidget">
+        <h2 id="stairTitle">Stairs (Today)</h2>
+        <p class="stairs-message" id="stairsMessage">
+        </p>
+      </section>
     </div>
-    <p id ='profileName'>
-      profileName
-    </p>
-    <p id ='emailAddress'>
-      emailAddress
-    </p>
-    <p id ='stepGoal'>
-      stepGoal
-    </p>
-    <div id ='friendsList'>
-      friendsList
-    </div>
-  </aside>
-</main>
-    <script src="bundle.js"></script>
-  </body>
+    <aside class="main-profile-bar">
+      <div>
+        <img class="profile-photo" src="https://thumbs.dreamstime.com/b/default-placeholder-fitness-trainer-t-shirt-half-length-portrait-photo-avatar-gray-color-default-placeholder-fitness-trainer-119457652.jpg" alt="Gym Karen">
+      </div>
+      <p id='profileName'>
+        profileName
+      </p>
+      <p id='emailAddress'>
+        emailAddress
+      </p>
+      <p id='stepGoal'>
+        stepGoal
+      </p>
+      <div id='friendsList'>
+        friendsList
+      </div>
+    </aside>
+  </main>
+  <script src="bundle.js"></script>
+</body>
+
 </html>
