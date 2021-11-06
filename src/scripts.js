@@ -291,7 +291,8 @@ const closeUserForm = () => {
 }
 
 const submitWaterData = () => {
-  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
+  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm
+    .value}
   postHydro(newData)
 }
 
