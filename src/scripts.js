@@ -80,7 +80,7 @@ const postHydro = (data) => {
     },
     body: JSON.stringify(data)
   }).then(response => response.json())
-    .then(generateHydro(data))
+    .then(fetchData())
     .catch(error => console.log(error))
 }
 
