@@ -38,6 +38,17 @@ const stepGoal = document.querySelector('#stepGoal');
 const stepGoalComparisons = document.querySelector('#stepGoalMessage');
 const stepTitle = document.querySelector('#stepTitle');
 const weekBtn = document.querySelector('#weekBtn');
+const addDataBtn = document.querySelector('#addData')
+const stepsWidget = document.querySelector('#stepsWidget')
+const waterWidget = document.querySelector('#waterWidget')
+const sleepWidget = document.querySelector('#sleepWidget')
+const stairsWidget = document.querySelector('#stairsWidget')
+const userForm = document.querySelector('#userForm')
+const stepForm = document.querySelector('#stepForm')
+const sleepForm = document.querySelector('#sleepForm')
+const waterForm = document.querySelector('#waterForm')
+const waterOunces = document.querySelector('#wateryForm')
+const submitButton = document.querySelector('#submitButton')
 
 
 
@@ -61,7 +72,41 @@ const fetchData = () => {
   })
 }
 
+const postHydro = (data) => {
+  fetch ('http://localhost:3001/api/v1/hydration', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateHydro(data))
+    .catch(error => console.log(error))
+}
 
+const postSleep = (data) => {
+  fetch ('http://localhost:3001/api/v1/sleep', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateSleep(data))
+    .catch(error => console.log(error))
+}
+
+const postActivity = (data) => {
+  fetch ('http://localhost:3001/api/v1/activity', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateActivity(data))
+    .catch(error => console.log(error))
+}
 
 const generateUsers = (users) => {
   userList = new UserRepository(users);
@@ -70,6 +115,7 @@ const generateUsers = (users) => {
 
 const generateHydro = (data) => {
   hydroRepo = new HydroRepository(data)
+  console.log(hydroRepo)
 }
 
 const generateSleep = (data) => {
@@ -209,9 +255,25 @@ const updateTitles = (choice) => {
   }
 }
 
+const openUserForm = () => {
+  stepsWidget.classList.add('hidden')
+  sleepWidget.classList.add('hidden')
+  waterWidget.classList.add('hidden')
+  stairsWidget.classList.add('hidden')
+  userForm.classList.remove('hidden')
+}
+
+const submitWaterData = () => {
+  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
+  postHydro(newData)
+  console.log(hydroRepo)
+}
+
 // Event Listeners
 
 window.addEventListener('load', pageLoad);
 weekBtn.addEventListener('click', updateDomWeek);
 dayBtn.addEventListener('click', updateDomDay);
 allTimeBtn.addEventListener('click', updateDomAllTime);
+addDataBtn.addEventListener('click', openUserForm);
+submitButton.addEventListener('click', submitWaterData)
