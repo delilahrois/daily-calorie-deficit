@@ -80,8 +80,16 @@ const postHydro = (data) => {
     },
     body: JSON.stringify(data)
   }).then(response => response.json())
-    .then(fetchData())
+    .then( () => {
+      fetchCurrentHydro()
+    })
     .catch(error => console.log(error))
+}
+
+const fetchCurrentHydro = () => {
+   fetchHydration
+  // .then(response => response.json())
+  .then(data => generateHydro(data.hydrationData))
 }
 
 const postSleep = (data) => {
@@ -266,7 +274,7 @@ const openUserForm = () => {
 const submitWaterData = () => {
   let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
   postHydro(newData)
-  console.log(hydroRepo)
+  // console.log(hydroRepo)
 }
 
 // Event Listeners
