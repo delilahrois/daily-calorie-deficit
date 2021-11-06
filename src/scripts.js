@@ -49,6 +49,9 @@ const sleepForm = document.querySelector('#sleepForm')
 const waterForm = document.querySelector('#waterForm')
 const waterOunces = document.querySelector('#wateryForm')
 const submitButton = document.querySelector('#submitButton')
+const sleepRadio = document.querySelector('#sleepAdd')
+const waterRadio = document.querySelector('#waterAdd')
+const activityRadio = document.querySelector('#stepAdd')
 
 
 
@@ -210,6 +213,7 @@ const updateHydroCardAllTime = () => {
 }
 
 const updateDomDay = () => {
+  closeUserForm();
   updateHydroCardDay();
   updateSleepCardDay();
   updateStepCardDay();
@@ -217,12 +221,14 @@ const updateDomDay = () => {
 }
 
 const updateDomWeek = () => {
+  closeUserForm();
   updateHydroCardWeek();
   updateSleepCardWeek();
   updateTitles('Week');
 }
 
 const updateDomAllTime = () => {
+  closeUserForm();
   updateHydroCardAllTime();
   updateSleepCardAllTime();
   updateTitles('All Time');
@@ -263,10 +269,37 @@ const openUserForm = () => {
   userForm.classList.remove('hidden')
 }
 
+const closeUserForm = () => {
+  stepsWidget.classList.remove('hidden')
+  sleepWidget.classList.remove('hidden')
+  waterWidget.classList.remove('hidden')
+  stairsWidget.classList.remove('hidden')
+  userForm.classList.add('hidden')
+}
+
 const submitWaterData = () => {
   let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
   postHydro(newData)
-  console.log(hydroRepo)
+}
+
+// const submitSleepData = () => {
+//   let newData = {userID: currentUser.id, date: today, hoursSlept: .value, sleepQuality: .value}
+//   postSleep(newData)
+// }
+
+// const submitActivityData = () => {
+//   let newData = {userID: currentUser.id, date: today, flightsOfStairs: .value, minutesActive: .value, numSteps: .value}
+//   postActivity(newData)
+// }
+
+const showInputForms = () => {
+  if (sleepRadio) {
+    sleepForm.classList.remove('hidden')
+  } else if (waterRadio) {
+    waterForm.classList.remove('hidden')
+  } else if (activityRadio) {
+    stepForm.classList.remove('hidden')
+  }
 }
 
 // Event Listeners
@@ -276,4 +309,5 @@ weekBtn.addEventListener('click', updateDomWeek);
 dayBtn.addEventListener('click', updateDomDay);
 allTimeBtn.addEventListener('click', updateDomAllTime);
 addDataBtn.addEventListener('click', openUserForm);
-submitButton.addEventListener('click', submitWaterData)
+submitButton.addEventListener('click', submitWaterData);
+userForm.addEventListener('click', showInputForms);
