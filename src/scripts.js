@@ -80,7 +80,7 @@ const postHydro = (data) => {
     },
     body: JSON.stringify(data)
   }).then(response => response.json())
-    .then(fetchData())
+    .then(generateHydro(data))
     .catch(error => console.log(error))
 }
 
@@ -264,10 +264,11 @@ const openUserForm = () => {
 }
 
 const submitWaterData = () => {
-  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
+  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm
+    .value}
   postHydro(newData)
-  console.log(hydroRepo)
 }
+
 
 // Event Listeners
 

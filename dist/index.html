@@ -30,19 +30,25 @@
       </div>
     </aside>
     <section class = "main-widget hidden" id = "userForm">
-      <input type='radio' id='stepAdd' value='step'>
+      <input type='radio' id='stepAdd' name='dataSelection' value='step'>
       <label for='step'>Add Step Data</label>
-      <input type='radio' id='sleepAdd' value='sleep'>
+      <input type='radio' id='sleepAdd' name='dataSelection' value='sleep'>
       <label for='sleep'>Add Sleep Data</label>
-      <input type='radio' id='waterAdd' value='water'>
+      <input type='radio' id='waterAdd' name='dataSelection' value='water'>
       <label for='water'>Add Water Data</label>
     <section class ='step-form hidden' id = 'stepForm'>
-        form goes here for step data
+      <label for="steppyForm">Steps Taken Today:</label>
+
+      <input type="text" id="steppyForm" name="name" required minlength="4" maxlength="8" size="10">
+      <button class = "aside-btn" id ="submitButton">Submit
     </section>
     <section class ='sleep-form hidden' id = 'sleepForm'>
-        form goes here for sleep data
+      <label for="sleepyForm">Hours Slept Today:</label>
+
+      <input type="text" id="sleepyForm" name="name" required minlength="4" maxlength="8" size="10">
+      <button class = "aside-btn" id ="submitButton">Submit
     </section>
-    <section class ='water-form' id = 'waterForm'>
+    <section class ='water-form hidden' id = 'waterForm'>
       <label for="wateryForm">Ounces of Water Drank Today:</label>
 
       <input type="text" id="wateryForm" name="name" required minlength="4" maxlength="8" size="10">
