@@ -38,6 +38,20 @@ const stepGoal = document.querySelector('#stepGoal');
 const stepGoalComparisons = document.querySelector('#stepGoalMessage');
 const stepTitle = document.querySelector('#stepTitle');
 const weekBtn = document.querySelector('#weekBtn');
+const addDataBtn = document.querySelector('#addData')
+const stepsWidget = document.querySelector('#stepsWidget')
+const waterWidget = document.querySelector('#waterWidget')
+const sleepWidget = document.querySelector('#sleepWidget')
+const stairsWidget = document.querySelector('#stairsWidget')
+const userForm = document.querySelector('#userForm')
+const stepForm = document.querySelector('#stepForm')
+const sleepForm = document.querySelector('#sleepForm')
+const waterForm = document.querySelector('#waterForm')
+const waterOunces = document.querySelector('#wateryForm')
+const submitButton = document.querySelector('#submitButton')
+const sleepRadio = document.querySelector('#sleepAdd')
+const waterRadio = document.querySelector('#waterAdd')
+const activityRadio = document.querySelector('#stepAdd')
 
 
 
@@ -75,6 +89,7 @@ const postHydro = (data) => {
 
 const postSleep = (data) => {
   fetch ('http://localhost:3001/api/v1/sleep', {
+
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json', 
@@ -96,7 +111,17 @@ const postActivity = (data) => {
     .then(generateActivity(data))
     .catch(error => console.log(error))
 }
-
+const postActivity = (data) => {
+  fetch ('http://localhost:3001/api/v1/activity', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  }).then(response => response.json())
+    .then(generateActivity(data))
+    .catch(error => console.log(error))
+}
 
 const generateUsers = (users) => {
   userList = new UserRepository(users);
@@ -105,6 +130,7 @@ const generateUsers = (users) => {
 
 const generateHydro = (data) => {
   hydroRepo = new HydroRepository(data)
+  console.log(hydroRepo)
 }
 
 const generateSleep = (data) => {
@@ -199,6 +225,7 @@ const updateHydroCardAllTime = () => {
 }
 
 const updateDomDay = () => {
+  closeUserForm();
   updateHydroCardDay();
   updateSleepCardDay();
   updateStepCardDay();
@@ -206,12 +233,14 @@ const updateDomDay = () => {
 }
 
 const updateDomWeek = () => {
+  closeUserForm();
   updateHydroCardWeek();
   updateSleepCardWeek();
   updateTitles('Week');
 }
 
 const updateDomAllTime = () => {
+  closeUserForm();
   updateHydroCardAllTime();
   updateSleepCardAllTime();
   updateTitles('All Time');
@@ -245,6 +274,47 @@ const updateTitles = (choice) => {
 }
 
 
+const openUserForm = () => {
+  stepsWidget.classList.add('hidden')
+  sleepWidget.classList.add('hidden')
+  waterWidget.classList.add('hidden')
+  stairsWidget.classList.add('hidden')
+  userForm.classList.remove('hidden')
+}
+
+const closeUserForm = () => {
+  stepsWidget.classList.remove('hidden')
+  sleepWidget.classList.remove('hidden')
+  waterWidget.classList.remove('hidden')
+  stairsWidget.classList.remove('hidden')
+  userForm.classList.add('hidden')
+}
+
+const submitWaterData = () => {
+  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
+  postHydro(newData)
+}
+
+// const submitSleepData = () => {
+//   let newData = {userID: currentUser.id, date: today, hoursSlept: .value, sleepQuality: .value}
+//   postSleep(newData)
+// }
+
+// const submitActivityData = () => {
+//   let newData = {userID: currentUser.id, date: today, flightsOfStairs: .value, minutesActive: .value, numSteps: .value}
+//   postActivity(newData)
+// }
+
+const showInputForms = () => {
+  if (sleepRadio) {
+    sleepForm.classList.remove('hidden')
+  } else if (waterRadio) {
+    waterForm.classList.remove('hidden')
+  } else if (activityRadio) {
+    stepForm.classList.remove('hidden')
+  }
+}
+
 
 // Event Listeners
 
@@ -252,3 +322,6 @@ window.addEventListener('load', pageLoad);
 weekBtn.addEventListener('click', updateDomWeek);
 dayBtn.addEventListener('click', updateDomDay);
 allTimeBtn.addEventListener('click', updateDomAllTime);
+addDataBtn.addEventListener('click', openUserForm);
+submitButton.addEventListener('click', submitWaterData);
+userForm.addEventListener('click', showInputForms);
