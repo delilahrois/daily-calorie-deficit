@@ -57,6 +57,7 @@ const minsActiveInput = document.querySelector('#minsActiveInput')
 const numOfStepsInput = document.querySelector('#numOfStepsInput')
 const hoursInput = document.querySelector('#hoursInput')
 const qualityInput = document.querySelector('#qualityInput')
+const wateryForm = document.querySelector('#wateryForm')
 
 
 // Functions
@@ -129,10 +130,12 @@ const generateHydro = (data) => {
 
 const generateSleep = (data) => {
   sleepRepo = new SleepRepository(data)
+  console.log(sleepRepo)
 }
 
 const generateActivity = (data) => {
   activityRepo = new ActivityRepository(data)
+  console.log(activityRepo)
 }
 
 const generateUserInfo = () => {
@@ -284,21 +287,40 @@ const closeUserForm = () => {
   userForm.classList.add('hidden')
 }
 
+const selectData = () => {
+  if (sleepRadio.checked) {
+    submitSleepData();
+    console.log('submit sleep just ran')
+  } else if (waterRadio.checked) {
+    submitWaterData();
+    console.log('submit water just ran')
+  } else if (activityRadio.checked) {
+    submitActivityData();
+    console.log('submit activity just ran')
+  }
+}
+
 const submitWaterData = () => {
   let newData = {userID: currentUser.id, date: today, numOunces: wateryForm
     .value}
   postHydro(newData)
+  console.log(newData)
 }
 
-// const submitSleepData = () => {
-//   let newData = {userID: currentUser.id, date: today, hoursSlept: .value, sleepQuality: .value}
-//   postSleep(newData)
-// }
+const submitSleepData = () => {
+  let newData = {userID: currentUser.id, date: today, hoursSlept: 
+    hoursInput.value, sleepQuality: qualityInput.value}
+  postSleep(newData)
+  console.log(newData)
+}
 
-// const submitActivityData = () => {
-//   let newData = {userID: currentUser.id, date: today, flightsOfStairs: .value, minutesActive: .value, numSteps: .value}
-//   postActivity(newData)
-// }
+const submitActivityData = () => {
+  let newData = {userID: currentUser.id, date: today, flightsOfStairs: 
+    flightsOfStairsInput.value, minutesActive: minsActiveInput
+    .value, numSteps: numOfStepsInput.value}
+  postActivity(newData)
+  console.log(newData)
+}
 
 const showInputForms = () => {
   if (sleepRadio.checked) {
@@ -324,5 +346,5 @@ weekBtn.addEventListener('click', updateDomWeek);
 dayBtn.addEventListener('click', updateDomDay);
 allTimeBtn.addEventListener('click', updateDomAllTime);
 addDataBtn.addEventListener('click', openUserForm);
-submitButton.addEventListener('click', submitWaterData);
+submitButton.addEventListener('click', selectData);
 userForm.addEventListener('click', showInputForms);
