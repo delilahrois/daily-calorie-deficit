@@ -161,7 +161,7 @@ const updateFriendsList = () => {
 }
 
 const updateStepCardDay = () => {
-  stepGoalComparisons.innerHTML = `
+  stepGoalMessage.innerHTML = `
   You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today compared to ${activityRepo.returnAllAverages(today).steps}, the average steps today of all users.
   <br>and walked ${activityRepo.returnMilesByDate(currentUser.id, currentUser.strideLength, today)} miles today.<br>
   Your step goal: ${currentUser.dailyStepGoal}
@@ -227,6 +227,12 @@ const updateActivityCardWeek = () => {
   })
 }
 
+const updateStepCardAllTime = () => {
+  stepGoalMessage.innerHTML = ``
+  let result = activityRepo.returnAvgStepsAllTime(currentUser.id)
+  stepGoalMessage.innerHTML = `Your average steps walked per day is ${result} steps.`
+}
+
 const updateSleepCardAllTime = () => {
   sleepMessage.innerHTML = ``;
   let resultHours = sleepRepo.returnDailyAvg(currentUser.id, 'hoursSlept');
@@ -235,13 +241,20 @@ const updateSleepCardAllTime = () => {
     ${resultHours} <br> Your total average sleep quality is: ${resultQuality}`;
 }
 
-
-
 const updateHydroCardAllTime = () => {
   hydrationMessage.innerHTML = ``;
   let result = hydroRepo.returnUserAvgPerDay(currentUser.id);
   hydrationMessage.innerHTML = `Your total average ounces of water drank
     per day is: ${result}.`;
+}
+
+const updateActivityCardAllTime = () => {
+  activityMessage.innerHTML = ``
+  let stairResult = activityRepo.returnHighestStairs(currentUser.id)
+  let minuteResult = activityRepo.returnMostMinutes(currentUser.id)
+  activityMessage.innerHTML = `Your all time record for stairs climbed in a day is ${stairResult.flightsOfStairs} flights of stairs on ${stairResult.date}. <br>
+  You were most active on ${minuteResult.date} with a total of ${minuteResult.minutesActive} minutes.
+  `
 }
 
 const updateDomDay = () => {
@@ -264,8 +277,10 @@ const updateDomWeek = () => {
 
 const updateDomAllTime = () => {
   closeUserForm();
+  updateStepCardAllTime();
   updateHydroCardAllTime();
   updateSleepCardAllTime();
+  updateActivityCardAllTime();
   updateTitles('All Time');
 }
 
@@ -278,19 +293,19 @@ const updateTitles = (choice) => {
   case 'Day':
     stepTitle.innerText = `Steps (Today)`;
     hydrationTitle.innerText = `Hydration (Today)`;
-    activityTitle.innerText = `Stairs (Today)`;
+    activityTitle.innerText = `Activity (Today)`;
     sleepTitle.innerText = `Sleep (Today)`;
     break;
   case 'Week':
     stepTitle.innerText = `Steps (Last Week)`
     hydrationTitle.innerText = `Hydration (Last Week)`
-    activityTitle.innerText = `Stairs (Last Week)`
+    activityTitle.innerText = `Activity (Last Week)`
     sleepTitle.innerText = `Sleep (Last Week)`
     break;
   case 'All Time':
     stepTitle.innerText = `Steps (All Time)`;
     hydrationTitle.innerText = `Hydration (All Time)`;
-    activityTitle.innerText = `Stairs (All Time)`;
+    activityTitle.innerText = `Activity (All Time)`;
     sleepTitle.innerText = `Sleep (All Time)`;
     break;
   }
