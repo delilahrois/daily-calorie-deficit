@@ -14,6 +14,16 @@ returnStepsPerDay(id, date) {
   return stepsToday.numSteps
 }
 
+returnAvgStepsAllTime(id) {
+  let allSteps = this.activities.filter((activity) => {
+    return activity.userID === id
+  })
+  let result = allSteps.reduce((sum, item) => {
+    return sum += item.numSteps
+  }, 0) / allSteps.length;
+  return Math.round(100 * result) / 100
+}
+
 returnDataPerWeek(id, dateEnd) {
   let weekPrior = dayjs(dateEnd).subtract(6, "days");
   let dateStart = weekPrior.format('YYYY/MM/DD');
@@ -82,13 +92,22 @@ returnStairsPerDay(id, date) {
     return daysGoalMet;
   }
 
+  returnMostMinutes(id) {
+    let highestMinutes = this.activities.filter((activity) => {
+      return activity.userID === id
+    }).sort((a,b) => {
+      return b.minutesActive - a.minutesActive;
+    })
+    return highestMinutes[0];
+  }
+
   returnHighestStairs(id) {
     let highestStepCount = this.activities.filter((activity) => {
       return activity.userID === id
     }).sort((a,b) => {
       return b.flightsOfStairs - a.flightsOfStairs;
     })
-    return highestStepCount[0].flightsOfStairs;
+    return highestStepCount[0];
   }
 
   returnAllAverages(date) {
