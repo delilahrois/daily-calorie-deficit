@@ -165,7 +165,7 @@ const updateStepCardDay = () => {
   You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today compared to ${activityRepo.returnAllAverages(today).steps}, the average steps today of all users.
   <br>and walked ${activityRepo.returnMilesByDate(currentUser.id, currentUser.strideLength, today)} miles today.<br>
   Your step goal: ${currentUser.dailyStepGoal}
-    Average step goal of all users: ${userList.calculateAverage()}`;
+    Average step goal of all users: ${userList.calculateAverage()}.`;
 }
 
 const updateHydroCardDay = () => {
@@ -180,7 +180,23 @@ const updateSleepCardDay = () => {
   sleepMessage.innerHTML = `Last night you slept ${sleepRepo.
     returnByDate(currentUser.id, today, 'hoursSlept')} hours. <br>
     Your average sleep quality score was ${sleepRepo.
-    returnByDate(currentUser.id, today, 'sleepQuality')}`;
+    returnByDate(currentUser.id, today, 'sleepQuality')}.`;
+}
+
+const updateActivityCardDay = () => {
+  activityMessage.innerHTML = ``;
+  activityMessage.innerHTML = `Today, you were active for ${activityRepo.returnActiveMinutes(currentUser.id, today)} minutes <br>
+  compared to ${activityRepo.returnAllAverages(today).minutes} minutes of all users.
+  You climbed ${activityRepo.returnStairsPerDay(currentUser.id, today)} flights of stairs today, compared to ${activityRepo.returnAllAverages(today).stairs}, the average stairs climbed today for all users..
+  `
+}
+
+const updateStepCardWeek = () => {
+  stepGoalComparisons.innerHTML = ``
+  let result = activityRepo.returnDataPerWeek(currentUser.id, today);
+  result.forEach((result) => {
+    stepGoalComparisons.innerHTML += `${result.date}: Steps Taken: ${result.steps} <br>`
+  })
 }
 
 const updateSleepCardWeek = () => {
@@ -192,13 +208,7 @@ const updateSleepCardWeek = () => {
   })
 }
 
-const updateActivityCardDay = () => {
-  activityMessage.innerHTML = ``;
-  activityMessage.innerHTML = `Today, you were active for ${activityRepo.returnActiveMinutes(currentUser.id, today)} minutes <br>
-  compared to ${activityRepo.returnAllAverages(today).minutes} minutes of all users.
 
-  `
-}
 
 const updateHydroCardWeek = () => {
   hydrationMessage.innerHTML = ``;
@@ -209,6 +219,14 @@ const updateHydroCardWeek = () => {
   })
 }
 
+const updateActivityCardWeek = () => {
+  activityMessage.innerHTML = ``;
+  let result = activityRepo.returnDataPerWeek(currentUser.id, today);
+  result.forEach((result) => {
+    activityMessage.innerHTML += `${result.date}: Stairs Climbed: ${result.stairs}, Minutes Active: ${result.minutes} <br>`
+  })
+}
+
 const updateSleepCardAllTime = () => {
   sleepMessage.innerHTML = ``;
   let resultHours = sleepRepo.returnDailyAvg(currentUser.id, 'hoursSlept');
@@ -216,6 +234,8 @@ const updateSleepCardAllTime = () => {
   sleepMessage.innerHTML = `Your total average hours for all time are:
     ${resultHours} <br> Your total average sleep quality is: ${resultQuality}`;
 }
+
+
 
 const updateHydroCardAllTime = () => {
   hydrationMessage.innerHTML = ``;
@@ -235,8 +255,10 @@ const updateDomDay = () => {
 
 const updateDomWeek = () => {
   closeUserForm();
+  updateStepCardWeek();
   updateHydroCardWeek();
   updateSleepCardWeek();
+  updateActivityCardWeek();
   updateTitles('Week');
 }
 
