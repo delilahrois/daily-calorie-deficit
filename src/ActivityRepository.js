@@ -83,9 +83,9 @@ returnStepsPerDay(id, date) {
       obj.minutes += data.minutesActive;
       return obj;
     }, {stairs: 0, steps: 0, minutes: 0});
-    sumForAllUsers.stairs = sumForAllUsers.stairs / totalDays;
-    sumForAllUsers.steps = sumForAllUsers.steps / totalDays;
-    sumForAllUsers.minutes = sumForAllUsers.minutes / totalDays;
+    sumForAllUsers.stairs = Math.round(sumForAllUsers.stairs / totalDays);
+    sumForAllUsers.steps = Math.round(sumForAllUsers.steps / totalDays);
+    sumForAllUsers.minutes = Math.round(sumForAllUsers.minutes / totalDays);
     return sumForAllUsers;
   }
 
