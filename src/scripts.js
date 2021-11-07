@@ -8,56 +8,57 @@ import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
   from './apiCalls';
 import './css/styles.scss';
 import './images/turing-logo.png';
-
-
+import { domUpdates } from './domUpdates.js';
 // Global Variables
 
-const today = '2020/01/22';
-let currentUser;
-let hydroRepo;
-let sleepRepo;
-let activityRepo;
-let userList;
+const globalVariables {
+today: '2020/01/22',
+currentUser,
+hydroRepo,
+sleepRepo,
+activityRepo,
+userList
+}
 
 
-//Query Selectors
-
-const allTimeBtn = document.querySelector('#allTimeBtn');
-const dayBtn = document.querySelector('#dayBtn');
-const emailAddress = document.querySelector('#emailAddress');
-const firstName = document.querySelector('#userName');
-const friendsList = document.querySelector('#friendsList');
-const headerMessage = document.querySelector('#headerMessage');
-const hydrationMessage = document.querySelector('#hydrationMessage');
-const hydrationTitle = document.querySelector('#hydrationTitle');
-const profileName = document.querySelector('#profileName');
-const sleepMessage = document.querySelector('#sleepMessage');
-const sleepTitle = document.querySelector('#sleepTitle');
-const activityTitle = document.querySelector('#activityTitle');
-const stepGoal = document.querySelector('#stepGoal');
-const stepGoalComparisons = document.querySelector('#stepGoalMessage');
-const stepTitle = document.querySelector('#stepTitle');
-const weekBtn = document.querySelector('#weekBtn');
-const addDataBtn = document.querySelector('#addData')
-const stepsWidget = document.querySelector('#stepsWidget')
-const waterWidget = document.querySelector('#waterWidget')
-const sleepWidget = document.querySelector('#sleepWidget')
-const activityWidget = document.querySelector('#activityWidget')
-const userForm = document.querySelector('#userForm')
-const stepForm = document.querySelector('#stepForm')
-const sleepForm = document.querySelector('#sleepForm')
-const waterForm = document.querySelector('#waterForm')
-const submitButton = document.querySelector('#submitButton')
-const sleepRadio = document.querySelector('#sleepAdd')
-const waterRadio = document.querySelector('#waterAdd')
-const activityRadio = document.querySelector('#stepAdd')
-const flightsOfStairsInput = document.querySelector('#flightsOfStairsInput')
-const minsActiveInput = document.querySelector('#minsActiveInput')
-const numOfStepsInput = document.querySelector('#numOfStepsInput')
-const hoursInput = document.querySelector('#hoursInput')
-const qualityInput = document.querySelector('#qualityInput')
-const wateryForm = document.querySelector('#wateryForm')
-
+// Query Selectors
+const querySelectors = {
+allTimeBtn: document.querySelector('#allTimeBtn'),
+dayBtn: document.querySelector('#dayBtn'),
+emailAddress: document.querySelector('#emailAddress'),
+firstName: document.querySelector('#userName'),
+friendsList: document.querySelector('#friendsList'),
+headerMessage: document.querySelector('#headerMessage'),
+hydrationMessage: document.querySelector('#hydrationMessage'),
+hydrationTitle: document.querySelector('#hydrationTitle'),
+profileName: document.querySelector('#profileName'),
+sleepMessage: document.querySelector('#sleepMessage'),
+sleepTitle: document.querySelector('#sleepTitle'),
+activityTitle: document.querySelector('#activityTitle'),
+stepGoal: document.querySelector('#stepGoal'),
+stepGoalComparisons: document.querySelector('#stepGoalMessage'),
+stepTitle: document.querySelector('#stepTitle'),
+weekBtn: document.querySelector('#weekBtn'),
+addDataBtn: document.querySelector('#addData'),
+stepsWidget: document.querySelector('#stepsWidget'),
+waterWidget: document.querySelector('#waterWidget'),
+sleepWidget: document.querySelector('#sleepWidget'),
+activityWidget: document.querySelector('#activityWidget'),
+userForm: document.querySelector('#userForm'),
+stepForm: document.querySelector('#stepForm'),
+sleepForm: document.querySelector('#sleepForm'),
+waterForm: document.querySelector('#waterForm'),
+submitButton: document.querySelector('#submitButton'),
+sleepRadio: document.querySelector('#sleepAdd'),
+waterRadio: document.querySelector('#waterAdd'),
+activityRadio: document.querySelector('#stepAdd'),
+flightsOfStairsInput: document.querySelector('#flightsOfStairsInput'),
+minsActiveInput: document.querySelector('#minsActiveInput'),
+numOfStepsInput: document.querySelector('#numOfStepsInput'),
+hoursInput: document.querySelector('#hoursInput'),
+qualityInput: document.querySelector('#qualityInput'),
+wateryForm: document.querySelector('#wateryForm')
+}
 
 // Functions
 
@@ -134,184 +135,37 @@ const generateActivity = (data) => {
 }
 
 const generateUserInfo = () => {
-  updateFirstName();
-  fillUserCard();
-}
-
-const updateFirstName = () => {
-  currentUser = userList.findUser(userList.returnRandomUser());
-  firstName.innerText = `Hello, ${currentUser.returnFirstName()}`;
-}
-
-const fillUserCard = () => {
-  profileName.innerText = `${currentUser.name}`;
-  emailAddress.innerText = `${currentUser.email}`;
-  stepGoal.innerText = `Your daily step goal is
-  ${currentUser.dailyStepGoal}`;
-  updateFriendsList();
-}
-
-const updateFriendsList = () => {
-  let friendNames = [];
-  currentUser.friends.forEach((friend) => {
-    let singleFriend = userList.findUser(friend);
-    friendNames.push(singleFriend.name.split(" ")[0])
-  });
-  friendsList.innerText = `Your friends: ${friendNames.join(', ')}`;
-}
-
-const updateStepCardDay = () => {
-  stepGoalComparisons.innerHTML = `
-  You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today compared to ${activityRepo.returnAllAverages(today).steps}, the average steps today of all users.
-  <br>and walked ${activityRepo.returnMilesByDate(currentUser.id, currentUser.strideLength, today)} miles today.<br>
-  Your step goal: ${currentUser.dailyStepGoal}
-    Average step goal of all users: ${userList.calculateAverage()}.`;
-}
-
-const updateHydroCardDay = () => {
-  hydrationMessage.innerHTML = ``;
-  hydrationMessage.innerHTML =
-  `<p>Today you drank ${hydroRepo.
-    returnUserWaterPerDay(currentUser.id, today)} ounces of water.</p>`;
-}
-
-const updateSleepCardDay = () => {
-  sleepMessage.innerHTML = ``;
-  sleepMessage.innerHTML = `Last night you slept ${sleepRepo.
-    returnByDate(currentUser.id, today, 'hoursSlept')} hours. <br>
-    Your average sleep quality score was ${sleepRepo.
-    returnByDate(currentUser.id, today, 'sleepQuality')}.`;
-}
-
-const updateActivityCardDay = () => {
-  activityMessage.innerHTML = ``;
-  activityMessage.innerHTML = `Today, you were active for ${activityRepo.returnActiveMinutes(currentUser.id, today)} minutes <br>
-  compared to ${activityRepo.returnAllAverages(today).minutes} minutes of all users.
-  You climbed ${activityRepo.returnStairsPerDay(currentUser.id, today)} flights of stairs today, compared to ${activityRepo.returnAllAverages(today).stairs}, the average stairs climbed today for all users..
-  `
-}
-
-const updateStepCardWeek = () => {
-  stepGoalComparisons.innerHTML = ``
-  let result = activityRepo.returnDataPerWeek(currentUser.id, today);
-  result.forEach((result) => {
-    stepGoalComparisons.innerHTML += `${result.date}: Steps Taken: ${result.steps} <br>`
-  })
-}
-
-const updateSleepCardWeek = () => {
-  sleepMessage.innerHTML = ``;
-  let result = sleepRepo.returnUserSleepThisWeek(currentUser.id, today);
-  result.forEach((result) => {
-    sleepMessage.innerHTML += `${result.date}: Hours Slept:
-    ${result.sleeps}, Quality: ${result.quality} <br>`;
-  })
-}
-
-
-
-const updateHydroCardWeek = () => {
-  hydrationMessage.innerHTML = ``;
-  let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today);
-  result.forEach((result) => {
-    hydrationMessage.innerHTML += `${result.date}:
-      ${result.ounces} ounces <br>`;
-  })
-}
-
-const updateActivityCardWeek = () => {
-  activityMessage.innerHTML = ``;
-  let result = activityRepo.returnDataPerWeek(currentUser.id, today);
-  result.forEach((result) => {
-    activityMessage.innerHTML += `${result.date}: Stairs Climbed: ${result.stairs}, Minutes Active: ${result.minutes} <br>`
-  })
-}
-
-const updateSleepCardAllTime = () => {
-  sleepMessage.innerHTML = ``;
-  let resultHours = sleepRepo.returnDailyAvg(currentUser.id, 'hoursSlept');
-  let resultQuality = sleepRepo.returnDailyAvg(currentUser.id, 'sleepQuality');
-  sleepMessage.innerHTML = `Your total average hours for all time are:
-    ${resultHours} <br> Your total average sleep quality is: ${resultQuality}`;
-}
-
-
-
-const updateHydroCardAllTime = () => {
-  hydrationMessage.innerHTML = ``;
-  let result = hydroRepo.returnUserAvgPerDay(currentUser.id);
-  hydrationMessage.innerHTML = `Your total average ounces of water drank
-    per day is: ${result}.`;
+  domUpdates.updateFirstName();
+  domUpdates.fillUserCard();
 }
 
 const updateDomDay = () => {
-  closeUserForm();
-  updateHydroCardDay();
-  updateSleepCardDay();
-  updateStepCardDay();
-  updateActivityCardDay();
-  updateTitles('Day');
+  domUpdates.closeUserForm();
+  domUpdates.updateHydroCardDay();
+  domUpdates.updateSleepCardDay();
+  domUpdates.updateStepCardDay();
+  domUpdates.updateActivityCardDay();
+  domUpdates.updateTitles('Day');
 }
 
 const updateDomWeek = () => {
-  closeUserForm();
-  updateStepCardWeek();
-  updateHydroCardWeek();
-  updateSleepCardWeek();
-  updateActivityCardWeek();
-  updateTitles('Week');
+  domUpdates.closeUserForm();
+  domUpdates.updateStepCardWeek();
+  domUpdates.updateHydroCardWeek();
+  domUpdates.updateSleepCardWeek();
+  domUpdates.updateActivityCardWeek();
+  domUpdates.updateTitles('Week');
 }
 
 const updateDomAllTime = () => {
-  closeUserForm();
-  updateHydroCardAllTime();
-  updateSleepCardAllTime();
-  updateTitles('All Time');
-}
-
-const updateHeaderDate = () => {
-  headerMessage.innerText = `Here's today ${today} at a glance.`;
-}
-
-const updateTitles = (choice) => {
-  switch (choice) {
-  case 'Day':
-    stepTitle.innerText = `Steps (Today)`;
-    hydrationTitle.innerText = `Hydration (Today)`;
-    activityTitle.innerText = `Stairs (Today)`;
-    sleepTitle.innerText = `Sleep (Today)`;
-    break;
-  case 'Week':
-    stepTitle.innerText = `Steps (Last Week)`
-    hydrationTitle.innerText = `Hydration (Last Week)`
-    activityTitle.innerText = `Stairs (Last Week)`
-    sleepTitle.innerText = `Sleep (Last Week)`
-    break;
-  case 'All Time':
-    stepTitle.innerText = `Steps (All Time)`;
-    hydrationTitle.innerText = `Hydration (All Time)`;
-    activityTitle.innerText = `Stairs (All Time)`;
-    sleepTitle.innerText = `Sleep (All Time)`;
-    break;
-  }
+  domUpdates.closeUserForm();
+  domUpdates.updateHydroCardAllTime();
+  domUpdates.updateSleepCardAllTime();
+  domUpdates.updateTitles('All Time');
 }
 
 
-const openUserForm = () => {
-  stepsWidget.classList.add('hidden')
-  sleepWidget.classList.add('hidden')
-  waterWidget.classList.add('hidden')
-  activityWidget.classList.add('hidden')
-  userForm.classList.remove('hidden')
-}
 
-const closeUserForm = () => {
-  stepsWidget.classList.remove('hidden')
-  sleepWidget.classList.remove('hidden')
-  waterWidget.classList.remove('hidden')
-  activityWidget.classList.remove('hidden')
-  userForm.classList.add('hidden')
-}
 
 const selectData = () => {
   if (sleepRadio.checked) {
@@ -338,29 +192,14 @@ const submitActivityData = () => {
   postActivity(newData)
 }
 
-const showInputForms = () => {
-  if (sleepRadio.checked) {
-    sleepForm.classList.remove('hidden')
-    waterForm.classList.add('hidden')
-    stepForm.classList.add('hidden')
-  } else if (waterRadio.checked) {
-    sleepForm.classList.add('hidden')
-    waterForm.classList.remove('hidden')
-    stepForm.classList.add('hidden')
-  } else if (activityRadio.checked) {
-    sleepForm.classList.add('hidden')
-    waterForm.classList.add('hidden')
-    stepForm.classList.remove('hidden')
-  }
-}
-
-
 // Event Listeners
 
 window.addEventListener('load', pageLoad);
-weekBtn.addEventListener('click', updateDomWeek);
-dayBtn.addEventListener('click', updateDomDay);
-allTimeBtn.addEventListener('click', updateDomAllTime);
-addDataBtn.addEventListener('click', openUserForm);
-submitButton.addEventListener('click', selectData);
-userForm.addEventListener('click', showInputForms);
+querySelectors.weekBtn.addEventListener('click', updateDomWeek);
+querySelectors.dayBtn.addEventListener('click', updateDomDay);
+querySelectors.allTimeBtn.addEventListener('click', updateDomAllTime);
+querySelectors.addDataBtn.addEventListener('click', domUpdates.openUserForm);
+querySelectors.submitButton.addEventListener('click', selectData);
+querySelectors.userForm.addEventListener('click', domUpdates.showInputForms);
+
+export default querySelectors;
