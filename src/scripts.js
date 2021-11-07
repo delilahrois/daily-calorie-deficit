@@ -51,7 +51,6 @@ const submitButton = document.querySelector('#submitButton')
 const sleepRadio = document.querySelector('#sleepAdd')
 const waterRadio = document.querySelector('#waterAdd')
 const activityRadio = document.querySelector('#stepAdd')
-
 const flightsOfStairsInput = document.querySelector('#flightsOfStairsInput')
 const minsActiveInput = document.querySelector('#minsActiveInput')
 const numOfStepsInput = document.querySelector('#numOfStepsInput')
@@ -94,7 +93,6 @@ const postHydro = (data) => {
 
 const postSleep = (data) => {
   fetch ('http://localhost:3001/api/v1/sleep', {
-
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json', 
@@ -125,23 +123,19 @@ const generateUsers = (users) => {
 
 const generateHydro = (data) => {
   hydroRepo = new HydroRepository(data)
-  console.log(hydroRepo)
 }
 
 const generateSleep = (data) => {
   sleepRepo = new SleepRepository(data)
-  console.log(sleepRepo)
 }
 
 const generateActivity = (data) => {
   activityRepo = new ActivityRepository(data)
-  console.log(activityRepo)
 }
 
 const generateUserInfo = () => {
   updateFirstName();
   fillUserCard();
-  // updateStepCardDay();
 }
 
 const updateFirstName = () => {
@@ -290,36 +284,26 @@ const closeUserForm = () => {
 const selectData = () => {
   if (sleepRadio.checked) {
     submitSleepData();
-    console.log('submit sleep just ran')
   } else if (waterRadio.checked) {
     submitWaterData();
-    console.log('submit water just ran')
   } else if (activityRadio.checked) {
     submitActivityData();
-    console.log('submit activity just ran')
   }
 }
 
 const submitWaterData = () => {
-  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm
-    .value}
+  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
   postHydro(newData)
-  console.log(newData)
 }
 
 const submitSleepData = () => {
-  let newData = {userID: currentUser.id, date: today, hoursSlept: 
-    hoursInput.value, sleepQuality: qualityInput.value}
+  let newData = {userID: currentUser.id, date: today, hoursSlept: hoursInput.value, sleepQuality: qualityInput.value}
   postSleep(newData)
-  console.log(newData)
 }
 
 const submitActivityData = () => {
-  let newData = {userID: currentUser.id, date: today, flightsOfStairs: 
-    flightsOfStairsInput.value, minutesActive: minsActiveInput
-    .value, numSteps: numOfStepsInput.value}
+  let newData = {userID: currentUser.id, date: today, flightsOfStairs: flightsOfStairsInput.value, minutesActive: minsActiveInput.value, numSteps: numOfStepsInput.value}
   postActivity(newData)
-  console.log(newData)
 }
 
 const showInputForms = () => {
