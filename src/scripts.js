@@ -8,16 +8,16 @@ import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
   from './apiCalls';
 import './css/styles.scss';
 import './images/turing-logo.png';
-import { domUpdates } from './domUpdates.js';
+import domUpdates from './domUpdates.js';
 // Global Variables
 
-const globalVariables {
+const globalVariables = {
 today: '2020/01/22',
-currentUser,
-hydroRepo,
-sleepRepo,
-activityRepo,
-userList
+currentUser: null,
+hydroRepo: null,
+sleepRepo: null,
+activityRepo: null,
+userList: null
 }
 
 
@@ -64,7 +64,6 @@ wateryForm: document.querySelector('#wateryForm')
 
 const pageLoad = () => {
   fetchData();
-  updateHeaderDate();
 }
 
 const fetchData = () => {
@@ -72,12 +71,15 @@ const fetchData = () => {
     return Promise.all(values.map(result => result.json()));
   }).then(values => {
     generateUsers(values[0].userData)
-    generateUserInfo();
     generateHydro(values[1].hydrationData)
     generateSleep(values[2].sleepData)
     generateActivity(values[3].activityData)
+    console.log(globalVariables)
     updateDomDay()
-  })
+    generateUserInfo();
+    domUpdates.updateHeaderDate();
+  }
+  )
 }
 
 const postHydro = (data) => {
@@ -118,20 +120,20 @@ const postActivity = (data) => {
 }
 
 const generateUsers = (users) => {
-  userList = new UserRepository(users);
-  userList.createEachUser();
+  globalVariables.userList = new UserRepository(users);
+  globalVariables.userList.createEachUser();
 }
 
 const generateHydro = (data) => {
-  hydroRepo = new HydroRepository(data)
+  globalVariables.hydroRepo = new HydroRepository(data)
 }
 
 const generateSleep = (data) => {
-  sleepRepo = new SleepRepository(data)
+  globalVariables.sleepRepo = new SleepRepository(data)
 }
 
 const generateActivity = (data) => {
-  activityRepo = new ActivityRepository(data)
+  globalVariables.activityRepo = new ActivityRepository(data)
 }
 
 const generateUserInfo = () => {
@@ -178,17 +180,17 @@ const selectData = () => {
 }
 
 const submitWaterData = () => {
-  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
+  let newData = {userID: globalVariables.currentUser.id, date: today, numOunces: wateryForm.value}
   postHydro(newData)
 }
 
 const submitSleepData = () => {
-  let newData = {userID: currentUser.id, date: today, hoursSlept: hoursInput.value, sleepQuality: qualityInput.value}
+  let newData = {userID: globalVariables.currentUser.id, date: today, hoursSlept: hoursInput.value, sleepQuality: qualityInput.value}
   postSleep(newData)
 }
 
 const submitActivityData = () => {
-  let newData = {userID: currentUser.id, date: today, flightsOfStairs: flightsOfStairsInput.value, minutesActive: minsActiveInput.value, numSteps: numOfStepsInput.value}
+  let newData = {userID: globalVariables.currentUser.id, date: today, flightsOfStairs: flightsOfStairsInput.value, minutesActive: minsActiveInput.value, numSteps: numOfStepsInput.value}
   postActivity(newData)
 }
 
@@ -202,4 +204,4 @@ querySelectors.addDataBtn.addEventListener('click', domUpdates.openUserForm);
 querySelectors.submitButton.addEventListener('click', selectData);
 querySelectors.userForm.addEventListener('click', domUpdates.showInputForms);
 
-export default querySelectors;
+export default { globalVariables, querySelectors}

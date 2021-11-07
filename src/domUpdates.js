@@ -1,122 +1,128 @@
-import { querySelectors } from './scripts.js';
+import querySelectors from './scripts.js';
+import globalVariables from './scripts.js';
+import UserRepository from './UserRepository';
+import HydroRepository from './HydroRepository';
+import SleepRepository from './SleepRepository';
+import ActivityRepository from './ActivityRepository';
+import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
+  from './apiCalls';
 
 let domUpdates = {
 
     updateFirstName() {
-        currentUser = userList.findUser(userList.returnRandomUser());
-        firstName.innerText = `Hello, ${currentUser.returnFirstName()}`;
+        globalVariables.currentUser = globalVariables.userList.findUser(globalVariables.userList.returnRandomUser());
+        firstName.innerText = `Hello, ${globalVariables.currentUser.returnFirstName()}`;
       },
-      
+
     fillUserCard(){
-        profileName.innerText = `${currentUser.name}`;
-        emailAddress.innerText = `${currentUser.email}`;
+        profileName.innerText = `${globalVariables.currentUser.name}`;
+        emailAddress.innerText = `${globalVariables.currentUser.email}`;
         stepGoal.innerText = `Your daily step goal is
-        ${currentUser.dailyStepGoal}`;
+        ${globalVariables.currentUser.dailyStepGoal}`;
         updateFriendsList();
       },
-      
+
     updateFriendsList(){
         let friendNames = [];
-        currentUser.friends.forEach((friend) => {
-          let singleFriend = userList.findUser(friend);
+        globalVariables.currentUser.friends.forEach((friend) => {
+          let singleFriend = globalVariables.userList.findUser(friend);
           friendNames.push(singleFriend.name.split(" ")[0])
         });
         friendsList.innerText = `Your friends: ${friendNames.join(', ')}`;
       },
-      
+
     updateStepCardDay(){
         stepGoalComparisons.innerHTML = `
-        You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today compared to ${activityRepo.returnAllAverages(today).steps}, the average steps today of all users.
-        <br>and walked ${activityRepo.returnMilesByDate(currentUser.id, currentUser.strideLength, today)} miles today.<br>
-        Your step goal: ${currentUser.dailyStepGoal}
-          Average step goal of all users: ${userList.calculateAverage()}.`;
+        You took ${globalVariables.activityRepo.returnStepsPerDay(globalVariables.currentUser.id, globalVariables.today)} steps globalVariables.today compared to ${globalVariables.activityRepo.returnAllAverages(globalVariables.today).steps}, the average steps globalVariables.today of all users.
+        <br>and walked ${globalVariables.activityRepo.returnMilesByDate(globalVariables.currentUser.id, globalVariables.currentUser.strideLength, globalVariables.today)} miles globalVariables.today.<br>
+        Your step goal: ${globalVariables.currentUser.dailyStepGoal}
+          Average step goal of all users: ${globalVariables.userList.calculateAverage()}.`;
       },
-      
+
     updateHydroCardDay() {
         hydrationMessage.innerHTML = ``;
         hydrationMessage.innerHTML =
-        `<p>Today you drank ${hydroRepo.
-          returnUserWaterPerDay(currentUser.id, today)} ounces of water.</p>`;
+        `<p>today you drank ${globalVariables.hydroRepo.returnUserWaterPerDay(globalVariables.currentUser.id, globalVariables.today)} ounces of water.</p>`;
       },
-      
+
     updateSleepCardDay() {
         sleepMessage.innerHTML = ``;
-        sleepMessage.innerHTML = `Last night you slept ${sleepRepo.
-          returnByDate(currentUser.id, today, 'hoursSlept')} hours. <br>
-          Your average sleep quality score was ${sleepRepo.
-          returnByDate(currentUser.id, today, 'sleepQuality')}.`;
+        sleepMessage.innerHTML = `Last night you slept ${globalVariables.sleepRepo.
+          returnByDate(globalVariables.currentUser.id, globalVariables.today, 'hoursSlept')} hours. <br>
+          Your average sleep quality score was ${globalVariables.sleepRepo.
+          returnByDate(globalVariables.currentUser.id, globalVariables.today, 'sleepQuality')}.`;
       },
-      
+
     updateActivityCardDay() {
         activityMessage.innerHTML = ``;
-        activityMessage.innerHTML = `Today, you were active for ${activityRepo.returnActiveMinutes(currentUser.id, today)} minutes <br>
-        compared to ${activityRepo.returnAllAverages(today).minutes} minutes of all users.
-        You climbed ${activityRepo.returnStairsPerDay(currentUser.id, today)} flights of stairs today, compared to ${activityRepo.returnAllAverages(today).stairs}, the average stairs climbed today for all users..
+        activityMessage.innerHTML = `globalVariables.today, you were active for ${globalVariables.activityRepo.returnActiveMinutes(globalVariables.currentUser.id, globalVariables.today)} minutes <br>
+        compared to ${globalVariables.activityRepo.returnAllAverages(globalVariables.today).minutes} minutes of all users.
+        You climbed ${globalVariables.activityRepo.returnStairsPerDay(globalVariables.currentUser.id, globalVariables.today)} flights of stairs globalVariables.today, compared to ${globalVariables.activityRepo.returnAllAverages(globalVariables.today).stairs}, the average stairs climbed globalVariables.today for all users..
         `
       },
-      
+
     updateStepCardWeek() {
         stepGoalComparisons.innerHTML = ``
-        let result = activityRepo.returnDataPerWeek(currentUser.id, today);
+        let result = globalVariables.activityRepo.returnDataPerWeek(globalVariables.currentUser.id, globalVariables.today);
         result.forEach((result) => {
           stepGoalComparisons.innerHTML += `${result.date}: Steps Taken: ${result.steps} <br>`
         })
       },
-      
+
     updateSleepCardWeek() {
         sleepMessage.innerHTML = ``;
-        let result = sleepRepo.returnUserSleepThisWeek(currentUser.id, today);
+        let result = globalVariables.sleepRepo.returnUserSleepThisWeek(globalVariables.currentUser.id, globalVariables.today);
         result.forEach((result) => {
           sleepMessage.innerHTML += `${result.date}: Hours Slept:
           ${result.sleeps}, Quality: ${result.quality} <br>`;
         })
       },
-      
-      
-      
+
+
+
     updateHydroCardWeek() {
         hydrationMessage.innerHTML = ``;
-        let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today);
+        let result = globalVariables.hydroRepo.returnUserWaterThisWeek(globalVariables.currentUser.id, globalVariables.today);
         result.forEach((result) => {
           hydrationMessage.innerHTML += `${result.date}:
             ${result.ounces} ounces <br>`;
         })
       },
-      
+
     updateActivityCardWeek() {
         activityMessage.innerHTML = ``;
-        let result = activityRepo.returnDataPerWeek(currentUser.id, today);
+        let result = globalVariables.activityRepo.returnDataPerWeek(globalVariables.currentUser.id, globalVariables.today);
         result.forEach((result) => {
           activityMessage.innerHTML += `${result.date}: Stairs Climbed: ${result.stairs}, Minutes Active: ${result.minutes} <br>`
         })
       },
-      
+
     updateSleepCardAllTime() {
         sleepMessage.innerHTML = ``;
-        let resultHours = sleepRepo.returnDailyAvg(currentUser.id, 'hoursSlept');
-        let resultQuality = sleepRepo.returnDailyAvg(currentUser.id, 'sleepQuality');
+        let resultHours = globalVariables.sleepRepo.returnDailyAvg(globalVariables.currentUser.id, 'hoursSlept');
+        let resultQuality = globalVariables.sleepRepo.returnDailyAvg(globalVariables.currentUser.id, 'sleepQuality');
         sleepMessage.innerHTML = `Your total average hours for all time are:
           ${resultHours} <br> Your total average sleep quality is: ${resultQuality}`;
-      }, 
-      
+      },
+
     updateHydroCardAllTime() {
         hydrationMessage.innerHTML = ``;
-        let result = hydroRepo.returnUserAvgPerDay(currentUser.id);
+        let result = globalVariables.hydroRepo.returnUserAvgPerDay(globalVariables.currentUser.id);
         hydrationMessage.innerHTML = `Your total average ounces of water drank
           per day is: ${result}.`;
       },
 
     updateHeaderDate() {
-        headerMessage.innerText = `Here's today ${today} at a glance.`;
+        headerMessage.innerText = `Here's globalVariables.today ${globalVariables.today} at a glance.`;
       },
-      
+
     updateTitles(choice) {
         switch (choice) {
         case 'Day':
-          stepTitle.innerText = `Steps (Today)`;
-          hydrationTitle.innerText = `Hydration (Today)`;
-          activityTitle.innerText = `Stairs (Today)`;
-          sleepTitle.innerText = `Sleep (Today)`;
+          stepTitle.innerText = `Steps (globalVariables.today)`;
+          hydrationTitle.innerText = `Hydration (globalVariables.today)`;
+          activityTitle.innerText = `Stairs (globalVariables.today)`;
+          sleepTitle.innerText = `Sleep (globalVariables.today)`;
           break;
         case 'Week':
           stepTitle.innerText = `Steps (Last Week)`
@@ -132,7 +138,7 @@ let domUpdates = {
           break;
         }
       },
-      
+
     showInputForms() {
         if (sleepRadio.checked) {
           sleepForm.classList.remove('hidden')
@@ -156,7 +162,7 @@ let domUpdates = {
         activityWidget.classList.add('hidden')
         userForm.classList.remove('hidden')
     },
-  
+
     closeUserForm() {
         stepsWidget.classList.remove('hidden')
         sleepWidget.classList.remove('hidden')
@@ -165,5 +171,5 @@ let domUpdates = {
         userForm.classList.add('hidden')
     }
   };
-  
+
   export default  domUpdates;
