@@ -47,12 +47,16 @@ const userForm = document.querySelector('#userForm')
 const stepForm = document.querySelector('#stepForm')
 const sleepForm = document.querySelector('#sleepForm')
 const waterForm = document.querySelector('#waterForm')
-const waterOunces = document.querySelector('#wateryForm')
 const submitButton = document.querySelector('#submitButton')
 const sleepRadio = document.querySelector('#sleepAdd')
 const waterRadio = document.querySelector('#waterAdd')
 const activityRadio = document.querySelector('#stepAdd')
-
+const flightsOfStairsInput = document.querySelector('#flightsOfStairsInput')
+const minsActiveInput = document.querySelector('#minsActiveInput')
+const numOfStepsInput = document.querySelector('#numOfStepsInput')
+const hoursInput = document.querySelector('#hoursInput')
+const qualityInput = document.querySelector('#qualityInput')
+const wateryForm = document.querySelector('#wateryForm')
 
 
 // Functions
@@ -89,7 +93,6 @@ const postHydro = (data) => {
 
 const postSleep = (data) => {
   fetch ('http://localhost:3001/api/v1/sleep', {
-
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json', 
@@ -100,17 +103,7 @@ const postSleep = (data) => {
     .catch(error => console.log(error))
 }
 
-const postActivity = (data) => {
-  fetch ('http://localhost:3001/api/v1/activity', {
-    method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json', 
-    }, 
-    body: JSON.stringify(data)
-  }).then(response => response.json())
-    .then(generateActivity(data))
-    .catch(error => console.log(error))
-}
+
 const postActivity = (data) => {
   fetch ('http://localhost:3001/api/v1/activity', {
     method: 'POST',
@@ -130,7 +123,6 @@ const generateUsers = (users) => {
 
 const generateHydro = (data) => {
   hydroRepo = new HydroRepository(data)
-  console.log(hydroRepo)
 }
 
 const generateSleep = (data) => {
@@ -144,7 +136,6 @@ const generateActivity = (data) => {
 const generateUserInfo = () => {
   updateFirstName();
   fillUserCard();
-  // updateStepCardDay();
 }
 
 const updateFirstName = () => {
@@ -290,28 +281,43 @@ const closeUserForm = () => {
   userForm.classList.add('hidden')
 }
 
+const selectData = () => {
+  if (sleepRadio.checked) {
+    submitSleepData();
+  } else if (waterRadio.checked) {
+    submitWaterData();
+  } else if (activityRadio.checked) {
+    submitActivityData();
+  }
+}
+
 const submitWaterData = () => {
-  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm
-    .value}
+  let newData = {userID: currentUser.id, date: today, numOunces: wateryForm.value}
   postHydro(newData)
 }
 
-// const submitSleepData = () => {
-//   let newData = {userID: currentUser.id, date: today, hoursSlept: .value, sleepQuality: .value}
-//   postSleep(newData)
-// }
+const submitSleepData = () => {
+  let newData = {userID: currentUser.id, date: today, hoursSlept: hoursInput.value, sleepQuality: qualityInput.value}
+  postSleep(newData)
+}
 
-// const submitActivityData = () => {
-//   let newData = {userID: currentUser.id, date: today, flightsOfStairs: .value, minutesActive: .value, numSteps: .value}
-//   postActivity(newData)
-// }
+const submitActivityData = () => {
+  let newData = {userID: currentUser.id, date: today, flightsOfStairs: flightsOfStairsInput.value, minutesActive: minsActiveInput.value, numSteps: numOfStepsInput.value}
+  postActivity(newData)
+}
 
 const showInputForms = () => {
-  if (sleepRadio) {
+  if (sleepRadio.checked) {
     sleepForm.classList.remove('hidden')
-  } else if (waterRadio) {
+    waterForm.classList.add('hidden')
+    stepForm.classList.add('hidden')
+  } else if (waterRadio.checked) {
+    sleepForm.classList.add('hidden')
     waterForm.classList.remove('hidden')
-  } else if (activityRadio) {
+    stepForm.classList.add('hidden')
+  } else if (activityRadio.checked) {
+    sleepForm.classList.add('hidden')
+    waterForm.classList.add('hidden')
     stepForm.classList.remove('hidden')
   }
 }
@@ -324,5 +330,5 @@ weekBtn.addEventListener('click', updateDomWeek);
 dayBtn.addEventListener('click', updateDomDay);
 allTimeBtn.addEventListener('click', updateDomAllTime);
 addDataBtn.addEventListener('click', openUserForm);
-submitButton.addEventListener('click', submitWaterData);
+submitButton.addEventListener('click', selectData);
 userForm.addEventListener('click', showInputForms);

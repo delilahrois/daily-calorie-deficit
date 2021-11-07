@@ -37,23 +37,28 @@
       <input type='radio' id='waterAdd' name='dataSelection' value='water'>
       <label for='water'>Add Water Data</label>
     <section class ='step-form hidden' id = 'stepForm'>
-      <label for="steppyForm">Steps Taken Today:</label>
+      <label for="flightsOfStairsInput">Flights of Stairs Climbed Today:</label>
+      <input type="text" id="flightsOfStairsInput" name="name" required minlength="4" maxlength="8" size="10">
+      <label for="minsActiveInput">Minutes Active Today:</label>
+      <input type="text" id="minsActiveInput" name="name" required minlength="4" maxlength="8" size="10">
+      <label for="numOfStepsInput">Steps Taken Today:</label>
+      <input type="text" id="numOfStepsInput" name="name" required minlength="4" maxlength="8" size="10">
 
-      <input type="text" id="steppyForm" name="name" required minlength="4" maxlength="8" size="10">
-      <button class = "aside-btn" id ="submitButton">Submit
     </section>
     <section class ='sleep-form hidden' id = 'sleepForm'>
-      <label for="sleepyForm">Hours Slept Today:</label>
+      <label for="hoursInput">Hours Slept Today:</label>
+      <input type="text" id="hoursInput" name="name" required minlength="4" maxlength="8" size="10">
+      <label for="qualityInput">Sleep Quality:</label>
+      <input type="text" id="qualityInput" name="name" required minlength="4" maxlength="8" size="10">
 
-      <input type="text" id="sleepyForm" name="name" required minlength="4" maxlength="8" size="10">
-      <button class = "aside-btn" id ="submitButton">Submit
     </section>
     <section class ='water-form hidden' id = 'waterForm'>
       <label for="wateryForm">Ounces of Water Drank Today:</label>
-
       <input type="text" id="wateryForm" name="name" required minlength="4" maxlength="8" size="10">
-      <button class = "aside-btn" id ="submitButton">Submit
     </section>
+    <div>
+      <button class = "aside-btn" id ="submitButton">Submit
+    </div>
     </section>
     <div class="row1">
       <section class="main-widget steps" id="stepsWidget">
