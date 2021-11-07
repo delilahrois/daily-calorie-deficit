@@ -14,6 +14,26 @@ returnStepsPerDay(id, date) {
   return stepsToday.numSteps
 }
 
+returnDataPerWeek(id, dateEnd) {
+  let weekPrior = dayjs(dateEnd).subtract(6, "days");
+  let dateStart = weekPrior.format('YYYY/MM/DD');
+  let userStepData = this.activities.filter((data) => {
+    return data.userID === id
+  }).filter((data) => {
+    return data.date >= dateStart
+  }).map((data) => {
+    return {date: data.date, steps: data.numSteps, minutes: data.minutesActive, stairs: data.flightsOfStairs}
+  })
+  return userStepData
+}
+
+returnStairsPerDay(id, date) {
+  let stairsToday = this.activities.find((activity) => {
+    return activity.userID === id && activity.date === date
+  })
+    return stairsToday.flightsOfStairs
+}
+
   returnMilesByDate(id, strideLength, date) {
 
     let userActivity = this.activities.find((activity) => {
@@ -83,9 +103,9 @@ returnStepsPerDay(id, date) {
       obj.minutes += data.minutesActive;
       return obj;
     }, {stairs: 0, steps: 0, minutes: 0});
-    sumForAllUsers.stairs = sumForAllUsers.stairs / totalDays;
-    sumForAllUsers.steps = sumForAllUsers.steps / totalDays;
-    sumForAllUsers.minutes = sumForAllUsers.minutes / totalDays;
+    sumForAllUsers.stairs = Math.round(sumForAllUsers.stairs / totalDays);
+    sumForAllUsers.steps = Math.round(sumForAllUsers.steps / totalDays);
+    sumForAllUsers.minutes = Math.round(sumForAllUsers.minutes / totalDays);
     return sumForAllUsers;
   }
 

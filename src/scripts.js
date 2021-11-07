@@ -33,7 +33,7 @@ const hydrationTitle = document.querySelector('#hydrationTitle');
 const profileName = document.querySelector('#profileName');
 const sleepMessage = document.querySelector('#sleepMessage');
 const sleepTitle = document.querySelector('#sleepTitle');
-const stairTitle = document.querySelector('#stairTitle');
+const activityTitle = document.querySelector('#activityTitle');
 const stepGoal = document.querySelector('#stepGoal');
 const stepGoalComparisons = document.querySelector('#stepGoalMessage');
 const stepTitle = document.querySelector('#stepTitle');
@@ -42,7 +42,7 @@ const addDataBtn = document.querySelector('#addData')
 const stepsWidget = document.querySelector('#stepsWidget')
 const waterWidget = document.querySelector('#waterWidget')
 const sleepWidget = document.querySelector('#sleepWidget')
-const stairsWidget = document.querySelector('#stairsWidget')
+const activityWidget = document.querySelector('#activityWidget')
 const userForm = document.querySelector('#userForm')
 const stepForm = document.querySelector('#stepForm')
 const sleepForm = document.querySelector('#sleepForm')
@@ -81,10 +81,10 @@ const fetchData = () => {
 
 const postHydro = (data) => {
   fetch ('http://localhost:3001/api/v1/hydration', {
-    method: 'POST', 
+    method: 'POST',
     headers: {
-      'Content-Type': 'application/json', 
-    }, 
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data)
   }).then(response => response.json())
     .then(generateHydro(data))
@@ -93,10 +93,10 @@ const postHydro = (data) => {
 
 const postSleep = (data) => {
   fetch ('http://localhost:3001/api/v1/sleep', {
-    method: 'POST', 
+    method: 'POST',
     headers: {
-      'Content-Type': 'application/json', 
-    }, 
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data)
   }).then(response => response.json())
     .then(generateSleep(data))
@@ -162,9 +162,10 @@ const updateFriendsList = () => {
 
 const updateStepCardDay = () => {
   stepGoalComparisons.innerHTML = `
-  You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today <br>
+  You took ${activityRepo.returnStepsPerDay(currentUser.id, today)} steps today compared to ${activityRepo.returnAllAverages(today).steps}, the average steps today of all users.
+  <br>and walked ${activityRepo.returnMilesByDate(currentUser.id, currentUser.strideLength, today)} miles today.<br>
   Your step goal: ${currentUser.dailyStepGoal}
-    Average step goal of all users: ${userList.calculateAverage()}`;
+    Average step goal of all users: ${userList.calculateAverage()}.`;
 }
 
 const updateHydroCardDay = () => {
@@ -179,7 +180,23 @@ const updateSleepCardDay = () => {
   sleepMessage.innerHTML = `Last night you slept ${sleepRepo.
     returnByDate(currentUser.id, today, 'hoursSlept')} hours. <br>
     Your average sleep quality score was ${sleepRepo.
-    returnByDate(currentUser.id, today, 'sleepQuality')}`;
+    returnByDate(currentUser.id, today, 'sleepQuality')}.`;
+}
+
+const updateActivityCardDay = () => {
+  activityMessage.innerHTML = ``;
+  activityMessage.innerHTML = `Today, you were active for ${activityRepo.returnActiveMinutes(currentUser.id, today)} minutes <br>
+  compared to ${activityRepo.returnAllAverages(today).minutes} minutes of all users.
+  You climbed ${activityRepo.returnStairsPerDay(currentUser.id, today)} flights of stairs today, compared to ${activityRepo.returnAllAverages(today).stairs}, the average stairs climbed today for all users..
+  `
+}
+
+const updateStepCardWeek = () => {
+  stepGoalComparisons.innerHTML = ``
+  let result = activityRepo.returnDataPerWeek(currentUser.id, today);
+  result.forEach((result) => {
+    stepGoalComparisons.innerHTML += `${result.date}: Steps Taken: ${result.steps} <br>`
+  })
 }
 
 const updateSleepCardWeek = () => {
@@ -191,12 +208,22 @@ const updateSleepCardWeek = () => {
   })
 }
 
+
+
 const updateHydroCardWeek = () => {
   hydrationMessage.innerHTML = ``;
   let result = hydroRepo.returnUserWaterThisWeek(currentUser.id, today);
   result.forEach((result) => {
     hydrationMessage.innerHTML += `${result.date}:
       ${result.ounces} ounces <br>`;
+  })
+}
+
+const updateActivityCardWeek = () => {
+  activityMessage.innerHTML = ``;
+  let result = activityRepo.returnDataPerWeek(currentUser.id, today);
+  result.forEach((result) => {
+    activityMessage.innerHTML += `${result.date}: Stairs Climbed: ${result.stairs}, Minutes Active: ${result.minutes} <br>`
   })
 }
 
@@ -207,6 +234,8 @@ const updateSleepCardAllTime = () => {
   sleepMessage.innerHTML = `Your total average hours for all time are:
     ${resultHours} <br> Your total average sleep quality is: ${resultQuality}`;
 }
+
+
 
 const updateHydroCardAllTime = () => {
   hydrationMessage.innerHTML = ``;
@@ -220,13 +249,16 @@ const updateDomDay = () => {
   updateHydroCardDay();
   updateSleepCardDay();
   updateStepCardDay();
+  updateActivityCardDay();
   updateTitles('Day');
 }
 
 const updateDomWeek = () => {
   closeUserForm();
+  updateStepCardWeek();
   updateHydroCardWeek();
   updateSleepCardWeek();
+  updateActivityCardWeek();
   updateTitles('Week');
 }
 
@@ -246,19 +278,19 @@ const updateTitles = (choice) => {
   case 'Day':
     stepTitle.innerText = `Steps (Today)`;
     hydrationTitle.innerText = `Hydration (Today)`;
-    stairTitle.innerText = `Stairs (Today)`;
+    activityTitle.innerText = `Stairs (Today)`;
     sleepTitle.innerText = `Sleep (Today)`;
     break;
   case 'Week':
     stepTitle.innerText = `Steps (Last Week)`
     hydrationTitle.innerText = `Hydration (Last Week)`
-    stairTitle.innerText = `Stairs (Last Week)`
+    activityTitle.innerText = `Stairs (Last Week)`
     sleepTitle.innerText = `Sleep (Last Week)`
     break;
   case 'All Time':
     stepTitle.innerText = `Steps (All Time)`;
     hydrationTitle.innerText = `Hydration (All Time)`;
-    stairTitle.innerText = `Stairs (All Time)`;
+    activityTitle.innerText = `Stairs (All Time)`;
     sleepTitle.innerText = `Sleep (All Time)`;
     break;
   }
@@ -269,7 +301,7 @@ const openUserForm = () => {
   stepsWidget.classList.add('hidden')
   sleepWidget.classList.add('hidden')
   waterWidget.classList.add('hidden')
-  stairsWidget.classList.add('hidden')
+  activityWidget.classList.add('hidden')
   userForm.classList.remove('hidden')
 }
 
@@ -277,7 +309,7 @@ const closeUserForm = () => {
   stepsWidget.classList.remove('hidden')
   sleepWidget.classList.remove('hidden')
   waterWidget.classList.remove('hidden')
-  stairsWidget.classList.remove('hidden')
+  activityWidget.classList.remove('hidden')
   userForm.classList.add('hidden')
 }
 

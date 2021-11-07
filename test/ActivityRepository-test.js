@@ -206,6 +206,6 @@ describe('ActivityRepository', () => {
   });
 
   it('should return the average stairs, steps, and minutes for all users for a specified date', () => {
-    expect(activities.returnAllAverages("2019/06/15")).to.deep.equal({stairs: 20.8, steps: 6026.6, minutes: 144.2})
+    expect(activities.returnAllAverages("2019/06/15")).to.deep.equal({stairs: 21, steps: 6027, minutes: 144})
   })
 });
