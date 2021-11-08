@@ -75,12 +75,14 @@ const fetchData = () => {
     generateSleep(values[2].sleepData)
     generateActivity(values[3].activityData)
     console.log(globalVariables)
-    updateDomDay()
     generateUserInfo();
+    updateDomDay()
     domUpdates.updateHeaderDate();
   }
   )
 }
+
+
 
 const postHydro = (data) => {
   fetch ('http://localhost:3001/api/v1/hydration', {
@@ -194,6 +196,7 @@ const submitActivityData = () => {
   postActivity(newData)
 }
 
+
 // Event Listeners
 
 window.addEventListener('load', pageLoad);
@@ -204,4 +207,4 @@ querySelectors.addDataBtn.addEventListener('click', domUpdates.openUserForm);
 querySelectors.submitButton.addEventListener('click', selectData);
 querySelectors.userForm.addEventListener('click', domUpdates.showInputForms);
 
-export default { globalVariables, querySelectors}
+export default { globalVariables, querySelectors }

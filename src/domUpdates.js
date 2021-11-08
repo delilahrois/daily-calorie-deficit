@@ -6,10 +6,13 @@ import SleepRepository from './SleepRepository';
 import ActivityRepository from './ActivityRepository';
 import { fetchUsers, fetchHydration, fetchSleep, fetchActivityData }
   from './apiCalls';
+import testHey from './scripts.js';
+
 
 let domUpdates = {
 
     updateFirstName() {
+
         globalVariables.currentUser = globalVariables.userList.findUser(globalVariables.userList.returnRandomUser());
         firstName.innerText = `Hello, ${globalVariables.currentUser.returnFirstName()}`;
       },
