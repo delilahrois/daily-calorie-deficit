@@ -13,7 +13,12 @@ Mod1 2108 FE
   - [Project Specs](#project-specs)
 
 ## Install + Setup
-   - clone this repo: [here](https://github.com/delilahrois/daily-calorie-deficit)
+  **To navigate the website live, a server download is required.**
+  - Download the necessary server and API [here](https://github.com/turingschool-examples/fitlit-api)
+  - Cd into the `server` directory and then into the `fit-lit-api` directory.
+  - In the command line, run **$npm start**
+  **Then:** 
+  - clone this repo: [here](https://github.com/delilahrois/daily-calorie-deficit)
    - On the command line, type: **$ npm install**
    - On the command line, type: **$ npm start**
 
