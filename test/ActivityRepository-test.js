@@ -202,7 +202,7 @@ describe('ActivityRepository', () => {
   });
 
   it('should be able to return the highest stair climb record', () => {
-    expect(activities.returnHighestStairs(1)).to.equal(36)
+    expect(activities.returnHighestStairs(1).flightsOfStairs).to.equal(36)
   });
 
   it('should return the average stairs, steps, and minutes for all users for a specified date', () => {
